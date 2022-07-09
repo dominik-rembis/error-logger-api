@@ -1,0 +1,42 @@
+version: '3.9'
+services:
+  app:
+    build:
+      dockerfile: ./docker/dev/Dockerfile
+      context: .
+    container_name: error-logger-api
+    ports:
+      - '80:80'
+    depends_on:
+      - database
+    volumes:
+      - .:/var/www/error-logger-api
+  database:
+    image: 'mariadb:10.8'
+    container_name: error-logger-api-database
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: error-logger
+    ports:
+      - '3306'
+    volumes:
+      - error-logger-api-database-init:/docker-entrypoint-initdb.d/init.sql
+      - error-logger-api-database-data:/var/lib/mysql
+  phpmyadmin:
+    depends_on:
+      - database
+    image: phpmyadmin/phpmyadmin
+    container_name: error-logger-api-phpmyadmin
+    ports:
+      - '8080:80'
+    environment:
+      - PMA_HOST=database
+      - MYSQL_ROOT_PASSWORD=password
+volumes:
+  error-logger-api-database-init:
+    name: error-logger-api-database-init
+    driver: local
+  error-logger-api-database-data:
+    name: error-logger-api-database-data
+    driver: local
