@@ -7,11 +7,12 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            App:
+            User\Data:
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
+                type: xml
+                dir: '%kernel.project_dir%/src/User/Data/Infrastructure/Mapping/Orm'
+                prefix: 'User\Data\Domain\Entity'
+                alias: User\Data
 
 when@test:
     doctrine:

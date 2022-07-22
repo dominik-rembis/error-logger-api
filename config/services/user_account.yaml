@@ -1,0 +1,26 @@
+services:
+    _defaults:
+        autowire: false
+        autoconfigure: false
+        public: false
+
+    user.account.create_account.controller:
+        public: true
+        class: User\Data\UserInterface\Controller\CreateAccount
+        arguments:
+            - '@shared.command.bus'
+
+    user.account.doctrine.repository:
+        class: User\Data\Infrastructure\Repository\UserDataRepository
+        arguments:
+            - '@doctrine.orm.entity_manager'
+
+    user.account.create_account.handler:
+        class: User\Data\Application\Action\Command\UserDataManager
+        arguments:
+            - '@user.account.doctrine.repository'
+
+    _instanceof:
+        Shared\Application\Action\MessageHandlerInterface:
+            tags:
+                - messenger.message_handler

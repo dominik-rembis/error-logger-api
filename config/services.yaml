@@ -1,7 +1,15 @@
-parameters:
-
 services:
     _defaults:
         autowire: false
         autoconfigure: false
         public: false
+
+    shared.request.param_converter:
+        class: Shared\Infrastructure\Proxy\ParamConverter\RequestParamConverter
+        tags:
+            - request.param_converter
+
+    shared.command.bus:
+        class: Shared\Infrastructure\Proxy\MessageBus\Command\CommandBus
+        arguments:
+            - '@command.bus'

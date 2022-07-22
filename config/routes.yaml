@@ -1,3 +1,5 @@
-controllers:
-    resource: ../src/
-    type: attribute
+tmp:
+    path: /user/data
+    methods:
+        - POST
+    controller: user.account.create_account.controller
