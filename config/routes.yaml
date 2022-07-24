@@ -1,5 +1,3 @@
-tmp:
-    path: /user/data
-    methods:
-        - POST
-    controller: user.account.create_account.controller
+user_data:
+    resource: ../src/User/Data/Infrastructure/Mapping/Routing/
+    type: directory

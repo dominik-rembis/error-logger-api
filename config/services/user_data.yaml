@@ -4,23 +4,21 @@ services:
         autoconfigure: false
         public: false
 
-    user.account.create_account.controller:
+    user.data.create_account.rest_controller:
         public: true
-        class: User\Data\UserInterface\Controller\CreateAccount
+        class: User\Data\UserInterface\Rest\CreateAccount
         arguments:
             - '@shared.command.bus'
 
-    user.account.doctrine.repository:
+    user.data.orm.repository:
         class: User\Data\Infrastructure\Repository\UserDataRepository
         arguments:
             - '@doctrine.orm.entity_manager'
 
-    user.account.create_account.handler:
+    user.data.user_data_manager.handler:
         class: User\Data\Application\Action\Command\UserDataManager
+        tags:
+            name: messenger.message_handler
+            handles: User\Data\Application\Model\Command\UserDataModel
         arguments:
-            - '@user.account.doctrine.repository'
-
-    _instanceof:
-        Shared\Application\Action\MessageHandlerInterface:
-            tags:
-                - messenger.message_handler
+            - '@user.data.orm.repository'

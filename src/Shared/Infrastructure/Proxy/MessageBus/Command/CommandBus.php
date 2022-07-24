@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Shared\Infrastructure\Proxy\MessageBus\Command;
 
 use Shared\Application\Model\Command\CommandInterface;
-use Shared\Application\Proxy\MessageBus\Command\CommandBusInterface;
+use Shared\Application\Action\Command\CommandBusInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CommandBus implements CommandBusInterface

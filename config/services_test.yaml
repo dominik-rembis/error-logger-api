@@ -1,0 +1,16 @@
+services:
+    _defaults:
+        autowire: false
+        autoconfigure: false
+        public: true
+
+    shared.command.bus:
+        class: Shared\Infrastructure\Proxy\MessageBus\Command\CommandBus
+        arguments:
+            - '@command.bus'
+
+    shared.example_command.handler:
+        class: Shared\Application\Action\Command\ExampleCommandHandler
+        tags:
+            name: messenger.message_handler
+            handles: Shared\Application\Model\Command\ExampleCommandMockImplementingCommandInterface

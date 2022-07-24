@@ -5,7 +5,7 @@ services:
         public: false
 
     shared.request.param_converter:
-        class: Shared\Infrastructure\Proxy\ParamConverter\RequestParamConverter
+        class: Shared\Infrastructure\Adapter\ParamConverter\RequestParamConverter
         tags:
             - request.param_converter
 

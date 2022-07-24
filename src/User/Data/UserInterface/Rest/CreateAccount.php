@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace User\Data\UserInterface\Controller;
+namespace User\Data\UserInterface\Rest;
 
-use Shared\Application\Proxy\MessageBus\Command\CommandBusInterface;
-use Symfony\Component\HttpFoundation\Response;
+use Shared\Application\Action\Command\CommandBusInterface;
+use Shared\Infrastructure\Proxy\Response\JsonResponse;
 use User\Data\Application\Model\Command\UserDataModel;
 
 final class CreateAccount
@@ -14,10 +14,10 @@ final class CreateAccount
         private readonly CommandBusInterface $commandBus
     ) {}
 
-    public function __invoke(UserDataModel $userDataModel): Response
+    public function __invoke(UserDataModel $userDataModel): JsonResponse
     {
         $this->commandBus->dispatch($userDataModel);
 
-        return new Response('ok');
+        return new JsonResponse();
     }
 }

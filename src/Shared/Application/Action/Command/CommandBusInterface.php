@@ -1,6 +1,6 @@
 <?php
 
-namespace Shared\Application\Proxy\MessageBus\Command;
+namespace Shared\Application\Action\Command;
 
 use Shared\Application\Model\Command\CommandInterface;
 
