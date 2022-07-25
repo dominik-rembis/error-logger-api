@@ -9,15 +9,10 @@ use Shared\Application\Model\Command\CommandInterface;
 final class UserDataModel implements CommandInterface
 {
     public function __construct(
-        private readonly string $email,
         private readonly string $name,
-        private readonly string $surname
+        private readonly string $surname,
+        private readonly string $email
     ) {}
-
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
 
     public function getName(): string
     {
@@ -27,6 +22,11 @@ final class UserDataModel implements CommandInterface
     public function getSurname(): string
     {
         return $this->surname;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
     }
 
     public function getLog(): string

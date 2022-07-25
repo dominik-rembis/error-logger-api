@@ -9,7 +9,23 @@ services:
         tags:
             - request.param_converter
 
+    shared.orm.repository:
+        class: Shared\Infrastructure\Repository\SharedRepository
+        arguments:
+            - '@doctrine.orm.entity_manager'
+
+    shared.unique_value.validator:
+        class: Shared\Application\Action\Validator\UniqueValueChecker
+        autoconfigure: true
+        arguments:
+            - '@shared.orm.repository'
+
     shared.command.bus:
         class: Shared\Infrastructure\Proxy\MessageBus\Command\CommandBus
         arguments:
             - '@command.bus'
+
+    shared.event.validation_failed.listener:
+        class: Shared\Infrastructure\EventListener\ValidationFailed
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }

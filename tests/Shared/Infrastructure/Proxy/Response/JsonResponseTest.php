@@ -13,16 +13,16 @@ final class JsonResponseTest extends BaseTestCase
     {
         $response = new JsonResponse();
 
-        $this->assertEquals('{"status":200}', $response->getContent());
+        $this->assertEquals('{"status":200,"message":null}', $response->getContent());
     }
 
     public function testCaseOfProvidingExampleContent(): void
     {
-        $exampleContent = ['tmp' => ['foo' => 'bar']];
+        $exampleContent = ['foo' => 'bar'];
 
         $response = new JsonResponse($exampleContent);
 
-        $this->assertEquals('{"tmp":{"foo":"bar"}}', $response->getContent());
+        $this->assertEquals('{"status":200,"data":{"foo":"bar"}}', $response->getContent());
     }
 
     public function testCaseOfCheckingProxyBaseClass(): void
