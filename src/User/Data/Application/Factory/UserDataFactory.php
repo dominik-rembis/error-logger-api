@@ -13,7 +13,7 @@ final class UserDataFactory
     public static function create(UserDataModel $userDataModel, string $password): UserData
     {
         return new UserData(
-            UserDataUuid::generate(),
+            $userDataModel->getUuid() ?? UserDataUuid::generate(),
             $userDataModel->getName(),
             $userDataModel->getSurname(),
             $userDataModel->getEmail(),

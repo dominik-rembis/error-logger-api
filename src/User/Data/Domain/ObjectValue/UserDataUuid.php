@@ -6,7 +6,7 @@ namespace User\Data\Domain\ObjectValue;
 
 use Shared\Infrastructure\Adapter\Uuid\AbstractUuid;
 
-class UserDataUuid extends AbstractUuid
+final class UserDataUuid extends AbstractUuid
 {
     public function __construct(string $uuid)
     {

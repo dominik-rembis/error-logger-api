@@ -30,5 +30,8 @@
                 <option name="columnName">email</option>
             </constraint>
         </property>
+        <property name="uuid">
+            <constraint name="Uuid"/>
+        </property>
     </class>
 </constraint-mapping>

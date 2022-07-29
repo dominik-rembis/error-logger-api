@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <doctrine-mapping>
     <entity name="User\Data\Domain\Entity\UserData">
-        <id name="uuid" type="uuid"/>
+        <id name="uuid" type="user_data_uuid"/>
 
         <field name="name" type="string" length="50"/>
         <field name="surname" type="string" length="50"/>

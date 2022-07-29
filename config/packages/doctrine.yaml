@@ -1,6 +1,8 @@
 doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
+        types:
+            user_data_uuid: User\Data\Infrastructure\Util\Orm\Type\UserDataUuidType
 
     orm:
         auto_generate_proxy_classes: true

@@ -10,6 +10,12 @@ services:
         arguments:
             - '@shared.command.bus'
 
+    user.data.update_account.rest_controller:
+        public: true
+        class: User\Data\UserInterface\Rest\UpdateAccountData
+        arguments:
+            - '@shared.command.bus'
+
     user.data.orm.repository:
         class: User\Data\Infrastructure\Repository\UserDataRepository
         arguments:
