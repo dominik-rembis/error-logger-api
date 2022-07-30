@@ -6,5 +6,5 @@ namespace User\Data\Domain\Strategy;
 
 interface PasswordStrategyInterface
 {
-    public function getPassword(): string;
+    public function getPassword(array $context = []): string;
 }

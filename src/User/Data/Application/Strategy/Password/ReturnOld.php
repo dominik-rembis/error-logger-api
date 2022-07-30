@@ -15,7 +15,7 @@ final class ReturnOld implements PasswordStrategyInterface
         private readonly UserDataRepositoryInterface $repository
     ) {}
 
-    public function getPassword(): string
+    public function getPassword(array $context = []): string
     {
         return $this->repository->findPasswordByUuid($this->uuid);
     }
