@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace User\Data\Application\Factory;
 
-use User\Data\Application\Model\Command\UserDataModel;
+use User\Data\Application\Model\Command\CreateAccountDataModel;
 use User\Data\Domain\Entity\UserData;
 use User\Data\Domain\ObjectValue\UserDataUuid;
 
 final class UserDataFactory
 {
-    public static function create(UserDataModel $userDataModel, string $password): UserData
+    public static function create(CreateAccountDataModel $accountDataModel, string $password): UserData
     {
         return new UserData(
-            $userDataModel->getUuid() ?? UserDataUuid::generate(),
-            $userDataModel->getName(),
-            $userDataModel->getSurname(),
-            $userDataModel->getEmail(),
+            UserDataUuid::generate(),
+            $accountDataModel->getName(),
+            $accountDataModel->getSurname(),
+            $accountDataModel->getEmail(),
             $password
         );
     }

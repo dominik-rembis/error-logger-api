@@ -11,5 +11,5 @@ interface UserDataRepositoryInterface
 {
     public function save(UserData ...$userData): void;
 
-    public function findPasswordByUuid(UserDataUuid $uuid): string;
+    public function findOneByUuid(UserDataUuid $uuid): ?UserData;
 }

@@ -18,21 +18,16 @@ final class UserDataRepository implements UserDataRepositoryInterface
     public function save(UserData ...$userData): void
     {
         foreach ($userData as $data) {
-            $this->entityManager->merge($data);
+            $this->entityManager->persist($data);
         }
 
         $this->entityManager->flush();
     }
 
-    public function findPasswordByUuid(UserDataUuid $uuid): string
+    public function findOneByUuid(UserDataUuid $uuid): ?UserData
     {
-        return $this->entityManager->createQueryBuilder()
-            ->select('ud.password')
-            ->from(UserData::class, 'ud')
-            ->where('ud.uuid = :uuid')
-            ->setMaxResults(1)
-            ->setParameter('uuid', $uuid, 'uuid')
-            ->getQuery()
-            ->getSingleScalarResult();
+        return $this->entityManager
+            ->getRepository(UserData::class)
+            ->findOneBy(['uuid' => $uuid]);
     }
 }

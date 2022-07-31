@@ -4,13 +4,13 @@ services:
         autoconfigure: false
         public: false
 
-    user.data.create_account.rest_controller:
+    user.data.create_account_data.rest_controller:
         public: true
-        class: User\Data\UserInterface\Rest\CreateAccount
+        class: User\Data\UserInterface\Rest\CreateAccountData
         arguments:
             - '@shared.command.bus'
 
-    user.data.update_account.rest_controller:
+    user.data.update_account_data.rest_controller:
         public: true
         class: User\Data\UserInterface\Rest\UpdateAccountData
         arguments:
@@ -21,10 +21,18 @@ services:
         arguments:
             - '@doctrine.orm.entity_manager'
 
-    user.data.user_data_manager.handler:
-        class: User\Data\Application\Action\Command\UserDataManager
+    user.data.account_data_creator.handler:
+        class: User\Data\Application\Action\Command\AccountDataCreator
         tags:
             name: messenger.message_handler
-            handles: User\Data\Application\Model\Command\UserDataModel
+            handles: User\Data\Application\Model\Command\CreateAccountDataModel
+        arguments:
+            - '@user.data.orm.repository'
+
+    user.data.account_data_updater.handler:
+        class: User\Data\Application\Action\Command\AccountDataUpdater
+        tags:
+            name: messenger.message_handler
+            handles: User\Data\Application\Model\Command\UpdateAccountDataModel
         arguments:
             - '@user.data.orm.repository'

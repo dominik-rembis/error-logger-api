@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping">
-    <class name="User\Data\Application\Model\Command\UserDataModel">
+    <class name="User\Data\Application\Model\Command\CreateAccountDataModel">
         <property name="name">
             <constraint name="NotBlank"/>
             <constraint name="Regex">
@@ -29,9 +29,6 @@
                 <option name="entityClass">User\Data\Domain\Entity\UserData</option>
                 <option name="columnName">email</option>
             </constraint>
-        </property>
-        <property name="uuid">
-            <constraint name="Uuid"/>
         </property>
     </class>
 </constraint-mapping>

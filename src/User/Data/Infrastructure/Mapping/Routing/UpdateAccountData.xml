@@ -4,6 +4,6 @@
         id="update_account_data"
         path="/user/{uuid}/data"
         methods="PUT"
-        controller="user.data.update_account.rest_controller"
+        controller="user.data.update_account_data.rest_controller"
     />
 </routes>

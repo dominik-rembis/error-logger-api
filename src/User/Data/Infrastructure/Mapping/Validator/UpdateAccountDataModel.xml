@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping">
+    <class name="User\Data\Application\Model\Command\UpdateAccountDataModel">
+        <property name="name">
+            <constraint name="NotBlank"/>
+            <constraint name="Regex">
+                <option name="pattern">/^\w+$/</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="max">50</option>
+            </constraint>
+        </property>
+        <property name="surname">
+            <constraint name="NotBlank"/>
+            <constraint name="Regex">
+                <option name="pattern">/^\w+$/</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="max">50</option>
+            </constraint>
+        </property>
+        <property name="email">
+            <constraint name="Length">
+                <option name="min">1</option>
+                <option name="max">100</option>
+            </constraint>
+            <constraint name="Email"/>
+<!--            ToDo walidowac czy ten sam mail dla usera-->
+        </property>
+    </class>
+</constraint-mapping>
