@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping">
-    <class name="User\Data\Application\Model\Command\UpdateAccountDataModel">
+    <class name="User\Data\Application\Model\Command\UpdateAccountModel">
         <property name="name">
             <constraint name="NotBlank"/>
             <constraint name="Regex">

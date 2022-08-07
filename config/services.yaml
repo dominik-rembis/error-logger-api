@@ -25,7 +25,7 @@ services:
         arguments:
             - '@command.bus'
 
-    shared.event.validation_failed.listener:
-        class: Shared\Infrastructure\EventListener\ValidationFailed
+    shared.event.kernel_exception.listener:
+        class: Shared\Infrastructure\EventListener\KernelException
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
