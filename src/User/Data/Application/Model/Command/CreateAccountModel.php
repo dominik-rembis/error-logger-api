@@ -6,7 +6,7 @@ namespace User\Data\Application\Model\Command;
 
 use Shared\Application\Model\Command\CommandInterface;
 
-final class CreateAccountDataModel implements CommandInterface
+final class CreateAccountModel implements CommandInterface
 {
     public function __construct(
         private readonly string $name,

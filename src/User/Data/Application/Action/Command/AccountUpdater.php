@@ -5,25 +5,25 @@ declare(strict_types=1);
 namespace User\Data\Application\Action\Command;
 
 use Shared\Domain\Exception\NotFound;
-use User\Data\Application\Model\Command\UpdateAccountDataModel;
+use User\Data\Application\Model\Command\UpdateAccountModel;
 use User\Data\Domain\Repository\UserDataRepositoryInterface;
 
-class AccountDataUpdater
+final class AccountUpdater
 {
     public function __construct(
         private readonly UserDataRepositoryInterface $repository
     ) {}
 
-    public function __invoke(UpdateAccountDataModel $accountDataModel): void
+    public function __invoke(UpdateAccountModel $accountModel): void
     {
-        $userData = $this->repository->findOneByUuid($accountDataModel->getUuid());
+        $userData = $this->repository->findOneByUuid($accountModel->getUuid());
 
         if (!$userData) {
             throw new NotFound();
         }
 
         $this->repository->save(
-            $userData->setProperties($accountDataModel->toArray())
+            $userData->setProperties($accountModel->toArray())
         );
     }
 }

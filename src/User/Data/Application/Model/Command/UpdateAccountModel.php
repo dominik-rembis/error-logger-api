@@ -7,7 +7,7 @@ namespace User\Data\Application\Model\Command;
 use Shared\Application\Model\Command\CommandInterface;
 use User\Data\Domain\ObjectValue\UserDataUuid;
 
-final class UpdateAccountDataModel implements CommandInterface
+final class UpdateAccountModel implements CommandInterface
 {
     public function __construct(
         private readonly string $uuid,
