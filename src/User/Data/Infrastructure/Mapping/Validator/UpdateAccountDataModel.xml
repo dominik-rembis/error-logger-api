@@ -25,7 +25,12 @@
                 <option name="max">100</option>
             </constraint>
             <constraint name="Email"/>
-<!--            ToDo walidowac czy ten sam mail dla usera-->
+            <constraint name="Shared\Application\Model\Validator\UniqueValue">
+                <option name="entityClass">User\Data\Domain\Entity\UserData</option>
+                <option name="columnName">email</option>
+                <option name="excludeByColumn">uuid</option>
+                <option name="excludedValueCallback">getUuid</option>
+            </constraint>
         </property>
     </class>
 </constraint-mapping>

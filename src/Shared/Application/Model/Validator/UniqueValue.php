@@ -12,6 +12,13 @@ final class UniqueValue extends AbstractConstraint
     protected string $message = 'This value already exists.';
     protected string $entityClass;
     protected string $columnName = 'uuid';
+    protected ?string $excludeByColumn = null;
+    protected ?string $excludedValueCallback = null;
+
+    public function getMessage(): string
+    {
+        return $this->message;
+    }
 
     public function getEntityClass(): string
     {
@@ -23,9 +30,14 @@ final class UniqueValue extends AbstractConstraint
         return $this->columnName;
     }
 
-    public function getMessage(): string
+    public function getExcludeByColumn(): ?string
     {
-        return $this->message;
+        return $this->excludeByColumn;
+    }
+
+    public function getExcludedValueCallback(): ?string
+    {
+        return $this->excludedValueCallback;
     }
 
     public function getValidatorClass(): string

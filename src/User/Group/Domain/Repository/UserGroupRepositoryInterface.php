@@ -9,5 +9,5 @@ interface UserGroupRepositoryInterface
 {
     public function save(UserGroup ...$userGroups): void;
 
-    public function findOneByUuid(UserGroupUuid $uuid): UserGroup;
+    public function findOneByUuid(UserGroupUuid $uuid): ?UserGroup;
 }

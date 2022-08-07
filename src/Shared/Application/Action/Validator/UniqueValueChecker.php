@@ -24,7 +24,9 @@ final class UniqueValueChecker extends AbstractConstraintValidator
         $result = $this->repository->recordExist(
             $this->constraint->getEntityClass(),
             $this->constraint->getColumnName(),
-            $value
+            $value,
+            $this->constraint->getExcludeByColumn(),
+            $this->getCallbackValue()
         );
 
         if ($result) {
@@ -33,5 +35,12 @@ final class UniqueValueChecker extends AbstractConstraintValidator
                 ->buildViolation($this->constraint->getMessage())
                 ->addViolation();
         }
+    }
+
+    private function getCallbackValue(): mixed
+    {
+        $callback = $this->constraint->getExcludedValueCallback();
+
+        return $callback ? call_user_func([$this->context->getObject(), $callback]) : null;
     }
 }

@@ -24,7 +24,7 @@ final class UserGroupRepository implements UserGroupRepositoryInterface
         $this->entityManager->flush();
     }
 
-    public function findOneByUuid(UserGroupUuid $uuid): UserGroup
+    public function findOneByUuid(UserGroupUuid $uuid): ?UserGroup
     {
         return $this->entityManager
             ->getRepository(UserGroup::class)

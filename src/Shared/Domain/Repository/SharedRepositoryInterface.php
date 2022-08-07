@@ -6,5 +6,11 @@ namespace Shared\Domain\Repository;
 
 interface SharedRepositoryInterface
 {
-    public function recordExist(string $entity, string $column, mixed $value): bool;
+    public function recordExist(
+        string $entity,
+        string $column,
+        mixed $value,
+        ?string $excludeByColumn = null,
+        mixed $excludedValue = null
+    ): bool;
 }

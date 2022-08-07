@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace User\Group\Application\Action\Command;
 
+use Shared\Domain\Exception\NotFound;
 use User\Data\Domain\Repository\UserDataRepositoryInterface;
 use User\Group\Application\Factory\UserGroupFactory;
 use User\Group\Application\Model\Command\UpdateGroupModel;
@@ -19,6 +20,10 @@ final class GroupUpdater
     public function __invoke(UpdateGroupModel $groupModel): void
     {
         $group = $this->userGroupRepository->findOneByUuid($groupModel->getUuid());
+        if (!$group) {
+            throw new NotFound();
+        }
+
         $users = $this->userDataRepository->findAllByUuids(...$groupModel->getUserUuids());
 
         $group->setProperties(
