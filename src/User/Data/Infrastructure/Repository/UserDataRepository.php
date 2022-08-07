@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace User\Data\Infrastructure\Repository;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 use User\Data\Domain\Entity\UserData;
 use User\Data\Domain\ObjectValue\UserDataUuid;
 use User\Data\Domain\Repository\UserDataRepositoryInterface;
@@ -26,8 +27,25 @@ final class UserDataRepository implements UserDataRepositoryInterface
 
     public function findOneByUuid(UserDataUuid $uuid): ?UserData
     {
-        return $this->entityManager
-            ->getRepository(UserData::class)
+        return $this->getRepository()
             ->findOneBy(['uuid' => $uuid]);
+    }
+
+    public function findAllByUuids(UserDataUuid ...$uuids): array
+    {
+        $qb = $this->entityManager->createQueryBuilder();
+
+        return $qb
+            ->select('ud')
+            ->from(UserData::class, 'ud')
+            ->where($qb->expr()->in('ud.uuid', ':uuidArray'))
+            ->setParameter('uuidArray', array_map(fn(UserDataUuid $uuid): string => $uuid->toBinary(), $uuids)) //ToDo custom array type
+            ->getQuery()
+            ->execute();
+    }
+
+    private function getRepository(): EntityRepository
+    {
+        return $this->entityManager->getRepository(UserData::class);
     }
 }

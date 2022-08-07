@@ -3,6 +3,7 @@ doctrine:
         url: '%env(resolve:DATABASE_URL)%'
         types:
             user_data_uuid: User\Data\Infrastructure\Util\Orm\Type\UserDataUuidType
+            user_group_uuid: User\Group\Infrastructure\Util\Orm\Type\UserDataUuidType
 
     orm:
         auto_generate_proxy_classes: true
@@ -15,6 +16,12 @@ doctrine:
                 dir: '%kernel.project_dir%/src/User/Data/Infrastructure/Mapping/Orm'
                 prefix: 'User\Data\Domain\Entity'
                 alias: User\Data
+            User\Group:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/User/Group/Infrastructure/Mapping/Orm'
+                prefix: 'User\Group\Domain\Entity'
+                alias: User\Group
 
 when@test:
     doctrine:

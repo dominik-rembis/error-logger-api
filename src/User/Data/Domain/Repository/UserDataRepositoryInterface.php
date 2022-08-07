@@ -12,4 +12,7 @@ interface UserDataRepositoryInterface
     public function save(UserData ...$userData): void;
 
     public function findOneByUuid(UserDataUuid $uuid): ?UserData;
+
+    /** @return UserData[] */
+    public function findAllByUuids(UserDataUuid ...$uuids): array;
 }

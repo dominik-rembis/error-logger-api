@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes xmlns="http://symfony.com/schema/routing">
+    <route
+        id="update_user_group"
+        path="/user/group/{uuid}"
+        methods="PUT"
+        controller="user.group.update_group.rest_controller"
+    />
+</routes>

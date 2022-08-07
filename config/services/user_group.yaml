@@ -1,0 +1,40 @@
+services:
+    _defaults:
+        autowire: false
+        autoconfigure: false
+        public: false
+
+    user.group.create_group.rest_controller:
+        public: true
+        class: User\Group\UserInterface\Rest\CreateGroup
+        arguments:
+            - '@shared.command.bus'
+
+    user.group.update_group.rest_controller:
+        public: true
+        class: User\Group\UserInterface\Rest\UpdateGroup
+        arguments:
+            - '@shared.command.bus'
+
+    user.group.orm.repository:
+        class: User\Group\Infrastructure\Repository\UserGroupRepository
+        arguments:
+            - '@doctrine.orm.entity_manager'
+
+    user.data.group_creator.handler:
+        class: User\Group\Application\Action\Command\GroupCreator
+        tags:
+            name: messenger.message_handler
+            handles: User\Group\Application\Model\Command\CreateGroupModel
+        arguments:
+            - '@user.data.orm.repository'
+            - '@user.group.orm.repository'
+
+    user.data.group_updater.handler:
+        class: User\Group\Application\Action\Command\GroupUpdater
+        tags:
+            name: messenger.message_handler
+            handles: User\Group\Application\Model\Command\UpdateGroupModel
+        arguments:
+            - '@user.data.orm.repository'
+            - '@user.group.orm.repository'

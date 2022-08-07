@@ -4,6 +4,7 @@ framework:
         mapping:
             paths:
                 - '%kernel.project_dir%/src/User/Data/Infrastructure/Mapping/Validator/'
+                - '%kernel.project_dir%/src/User/Group/Infrastructure/Mapping/Validator/'
 
 when@test:
     framework:
