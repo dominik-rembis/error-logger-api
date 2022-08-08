@@ -6,7 +6,6 @@ namespace Shared\Infrastructure\Proxy\Collection;
 
 use Doctrine\Common\Collections\ArrayCollection as BaseArrayCollection;
 
-final class ArrayCollection extends BaseArrayCollection
+class ArrayCollection extends BaseArrayCollection
 {
-
 }

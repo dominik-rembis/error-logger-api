@@ -4,16 +4,19 @@ declare(strict_types=1);
 
 namespace User\Group\Domain\Entity;
 
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\PersistentCollection;
 use Shared\Domain\Entity\AggregateRoot;
+use User\Data\Domain\Collection\UserDataCollection;
 use User\Group\Domain\ObjectValue\UserGroupUuid;
 
 final class UserGroup extends AggregateRoot
 {
+    private iterable $users;
+
     public function __construct(
         private UserGroupUuid $uuid,
         private string $name,
-        private Collection $users
-    ) {}
+        UserDataCollection $users
+    ) {
+        $this->users = $users;
+    }
 }
