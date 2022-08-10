@@ -27,7 +27,15 @@ services:
             name: messenger.message_handler
             handles: User\Group\Application\Model\Command\CreateGroupModel
         arguments:
-            - '@user.data.orm.repository'
+            - '@shared.query.bus'
+            - '@shared.persistence.repository'
+
+    user.data.group_finder.handler:
+        class: User\Group\Application\Action\Query\GroupFinder
+        tags:
+            name: messenger.message_handler
+            handles: User\Group\Application\Model\Query\Group
+        arguments:
             - '@user.group.orm.repository'
 
     user.data.group_updater.handler:
@@ -36,5 +44,5 @@ services:
             name: messenger.message_handler
             handles: User\Group\Application\Model\Command\UpdateGroupModel
         arguments:
-            - '@user.data.orm.repository'
-            - '@user.group.orm.repository'
+            - '@shared.query.bus'
+            - '@shared.persistence.repository'

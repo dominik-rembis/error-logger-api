@@ -4,32 +4,29 @@ declare(strict_types=1);
 
 namespace User\Group\Application\Action\Command;
 
-use Shared\Domain\Exception\NotFound;
-use User\Data\Domain\Repository\UserDataRepositoryInterface;
-use User\Group\Application\Factory\UserGroupFactory;
+use Shared\Application\Action\Query\QueryBusInterface;
+use Shared\Domain\Repository\PersistenceInterface;
 use User\Group\Application\Model\Command\UpdateGroupModel;
-use User\Group\Domain\Repository\UserGroupRepositoryInterface;
+use User\Group\Application\Model\Query\Group;
+use User\Shared\Application\Model\Query\UserCollection;
 
 final class GroupUpdater
 {
     public function __construct(
-        private readonly UserDataRepositoryInterface $userDataRepository,
-        private readonly UserGroupRepositoryInterface $userGroupRepository
+        private readonly QueryBusInterface $queryBus,
+        private readonly PersistenceInterface $persistence
     ) {}
 
     public function __invoke(UpdateGroupModel $groupModel): void
     {
-        $group = $this->userGroupRepository->findOneByUuid($groupModel->getUuid());
-        if (!$group) {
-            throw new NotFound();
-        }
+        $group = $this->queryBus->handle(new Group($groupModel->getUuid()));
+        $users = $this->queryBus->handle(new UserCollection($groupModel->getUserUuids()));
 
-        $users = $this->userDataRepository->findAllByUuids(...$groupModel->getUserUuids());
+        $group->setProperties([
+            'name' => $groupModel->getName(),
+            'users' => $users
+        ]);
 
-        $group->setProperties(
-            UserGroupFactory::createPropertiesArray($groupModel, $users)
-        );
-
-        $this->userGroupRepository->save($group);
+        $this->persistence->save($group);
     }
 }

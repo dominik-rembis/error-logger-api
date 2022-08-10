@@ -7,7 +7,5 @@ use User\Group\Domain\ObjectValue\UserGroupUuid;
 
 interface UserGroupRepositoryInterface
 {
-    public function save(UserGroup ...$userGroups): void;
-
     public function findOneByUuid(UserGroupUuid $uuid): ?UserGroup;
 }

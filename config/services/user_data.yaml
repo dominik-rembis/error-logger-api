@@ -27,6 +27,14 @@ services:
             name: messenger.message_handler
             handles: User\Data\Application\Model\Command\CreateAccountModel
         arguments:
+            - '@shared.persistence.repository'
+
+    user.data.user_finder.handler:
+        class: User\Data\Application\Action\Query\UserFinder
+        tags:
+            name: messenger.message_handler
+            handles: User\Data\Application\Model\Query\User
+        arguments:
             - '@user.data.orm.repository'
 
     user.data.account_updater.handler:
@@ -34,5 +42,14 @@ services:
         tags:
             name: messenger.message_handler
             handles: User\Data\Application\Model\Command\UpdateAccountModel
+        arguments:
+            - '@shared.query.bus'
+            - '@shared.persistence.repository'
+
+    user.data.user_collection_finder.handler:
+        class: User\Data\Application\Action\Query\UserCollectionFinder
+        tags:
+            name: messenger.message_handler
+            handles: User\Shared\Application\Model\Query\UserCollection
         arguments:
             - '@user.data.orm.repository'

@@ -4,30 +4,17 @@ declare(strict_types=1);
 
 namespace User\Data\Infrastructure\Repository;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
+use Shared\Infrastructure\Repository\AbstractRepository;
 use User\Data\Domain\Entity\UserData;
 use User\Data\Domain\ObjectValue\UserDataUuid;
 use User\Data\Domain\Repository\UserDataRepositoryInterface;
 
-final class UserDataRepository implements UserDataRepositoryInterface
+final class UserDataRepository extends AbstractRepository implements UserDataRepositoryInterface
 {
-    public function __construct(
-        private readonly EntityManagerInterface $entityManager
-    ) {}
-
-    public function save(UserData ...$userData): void
-    {
-        foreach ($userData as $data) {
-            $this->entityManager->persist($data);
-        }
-
-        $this->entityManager->flush();
-    }
-
     public function findOneByUuid(UserDataUuid $uuid): ?UserData
     {
-        return $this->getRepository()
+        return $this->entityManager
+            ->getRepository(UserData::class)
             ->findOneBy(['uuid' => $uuid]);
     }
 
@@ -42,10 +29,5 @@ final class UserDataRepository implements UserDataRepositoryInterface
             ->setParameter('uuidArray', array_map(fn(UserDataUuid $uuid): string => $uuid->toBinary(), $uuids)) //ToDo custom array type
             ->getQuery()
             ->execute();
-    }
-
-    private function getRepository(): EntityRepository
-    {
-        return $this->entityManager->getRepository(UserData::class);
     }
 }

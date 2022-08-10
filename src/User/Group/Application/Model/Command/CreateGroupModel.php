@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace User\Group\Application\Model\Command;
 
 use Shared\Application\Model\Command\CommandInterface;
-use User\Data\Domain\ObjectValue\UserDataUuid;
 
 final class CreateGroupModel implements CommandInterface
 {
@@ -21,10 +20,7 @@ final class CreateGroupModel implements CommandInterface
 
     public function getUserUuids(): array
     {
-        return array_map(
-            fn(string $uuid): UserDataUuid => UserDataUuid::fromString($uuid),
-            $this->userUuids
-        );
+        return $this->userUuids;
     }
 
     public function getLog(): string

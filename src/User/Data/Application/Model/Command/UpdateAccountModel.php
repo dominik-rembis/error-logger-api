@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace User\Data\Application\Model\Command;
 
 use Shared\Application\Model\Command\CommandInterface;
-use User\Data\Domain\ObjectValue\UserDataUuid;
 
 final class UpdateAccountModel implements CommandInterface
 {
@@ -16,9 +15,9 @@ final class UpdateAccountModel implements CommandInterface
         private readonly string $email,
     ) {}
 
-    public function getUuid(): UserDataUuid
+    public function getUuid(): string
     {
-        return UserDataUuid::fromString($this->uuid);
+        return $this->uuid;
     }
 
     public function toArray(): array

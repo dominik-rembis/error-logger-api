@@ -4,16 +4,11 @@ declare(strict_types=1);
 
 namespace Shared\Infrastructure\Repository;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Shared\Domain\Repository\SharedRepositoryInterface;
 use Shared\Infrastructure\Adapter\Uuid\AbstractUuid;
 
-final class SharedRepository implements SharedRepositoryInterface
+final class SharedRepository extends AbstractRepository implements SharedRepositoryInterface
 {
-    public function __construct(
-        private readonly EntityManagerInterface $entityManager
-    ) {}
-
     public function recordExist(
         string $entity,
         string $column,

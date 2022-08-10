@@ -14,6 +14,11 @@ services:
         arguments:
             - '@doctrine.orm.entity_manager'
 
+    shared.persistence.repository:
+        class: Shared\Infrastructure\Repository\PersistenceRepository
+        arguments:
+            - '@doctrine.orm.entity_manager'
+
     shared.unique_value.validator:
         class: Shared\Application\Action\Validator\UniqueValueChecker
         autoconfigure: true
@@ -21,9 +26,14 @@ services:
             - '@shared.orm.repository'
 
     shared.command.bus:
-        class: Shared\Infrastructure\Proxy\MessageBus\Command\CommandBus
+        class: Shared\Infrastructure\Proxy\MessageBus\CommandBus
         arguments:
             - '@command.bus'
+
+    shared.query.bus:
+        class: Shared\Infrastructure\Proxy\MessageBus\QueryBus
+        arguments:
+            - '@query.bus'
 
     shared.event.kernel_exception.listener:
         class: Shared\Infrastructure\EventListener\KernelException

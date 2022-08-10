@@ -9,8 +9,6 @@ use User\Data\Domain\ObjectValue\UserDataUuid;
 
 interface UserDataRepositoryInterface
 {
-    public function save(UserData ...$userData): void;
-
     public function findOneByUuid(UserDataUuid $uuid): ?UserData;
 
     /** @return UserData[] */

@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace User\Data\Application\Action\Command;
 
-use Shared\Domain\Exception\NotFound;
+use Shared\Application\Action\Query\QueryBusInterface;
+use Shared\Domain\Repository\PersistenceInterface;
 use User\Data\Application\Model\Command\UpdateAccountModel;
-use User\Data\Domain\Repository\UserDataRepositoryInterface;
+use User\Data\Application\Model\Query\User;
 
 final class AccountUpdater
 {
     public function __construct(
-        private readonly UserDataRepositoryInterface $repository
+        private readonly QueryBusInterface $queryBus,
+        private readonly PersistenceInterface $persistence
     ) {}
 
     public function __invoke(UpdateAccountModel $accountModel): void
     {
-        $userData = $this->repository->findOneByUuid($accountModel->getUuid());
+        $userData = $this->queryBus->handle(new User($accountModel->getUuid()));
 
-        if (!$userData) {
-            throw new NotFound();
-        }
-
-        $this->repository->save(
+        $this->persistence->save(
             $userData->setProperties($accountModel->toArray())
         );
     }
