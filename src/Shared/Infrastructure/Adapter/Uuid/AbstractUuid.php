@@ -33,4 +33,9 @@ abstract class AbstractUuid extends AbstractUid
     {
         return Uuid::fromString($this->uid)->toBinary();
     }
+
+    public function __toString(): string
+    {
+        return $this->toRfc4122();
+    }
 }

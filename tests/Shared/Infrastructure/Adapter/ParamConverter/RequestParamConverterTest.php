@@ -7,6 +7,7 @@ namespace Shared\Infrastructure\Adapter\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Shared\Application\Model\Command\ExampleCommandMock;
 use Shared\Application\Model\Command\ExampleCommandMockImplementingCommandInterface;
+use Shared\Application\Model\Query\ExampleQueryMockImplementingQueryInterface;
 use Shared\Infrastructure\Proxy\Test\BaseTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -30,9 +31,17 @@ final class RequestParamConverterTest extends BaseTestCase
         $this->assertEquals(true, $requestParamConverter->supports($paramConverter));
     }
 
+    public function testCaseSupportForObjectImplementingQueryInterface(): void
+    {
+        $paramConverter = new ParamConverter(class: ExampleQueryMockImplementingQueryInterface::class);
+        $requestParamConverter = new RequestParamConverter();
+
+        $this->assertEquals(true, $requestParamConverter->supports($paramConverter));
+    }
+
     public function testCaseOfCreatingAnInstanceOfClassFromTransferredParametersInBody(): void
     {
-        $request = new Request(content: '{"tmp": "buz", "foo": "fizz"}');
+        $request = new Request(server: ['CONTENT_TYPE' => 'json'], content: '{"tmp": "buz", "foo": "fizz"}');
         $paramConverter = new ParamConverter(
             data: ['name' => self::PARAMETER_NAME],
             class: ExampleCommandMockImplementingCommandInterface::class

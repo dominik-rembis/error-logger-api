@@ -9,6 +9,10 @@ use User\Data\Domain\ObjectValue\UserDataUuid;
 
 interface UserDataRepositoryInterface
 {
+    public function findAllAccount(): array;
+
+    public function findAccountDataByUuid(UserDataUuid $uuid): array;
+
     public function findOneByUuid(UserDataUuid $uuid): ?UserData;
 
     /** @return UserData[] */

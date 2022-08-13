@@ -10,17 +10,6 @@ services:
         arguments:
             - '@shared.command.bus'
 
-    user.data.update_account.rest_controller:
-        public: true
-        class: User\Data\UserInterface\Rest\UpdateAccount
-        arguments:
-            - '@shared.command.bus'
-
-    user.data.orm.repository:
-        class: User\Data\Infrastructure\Repository\UserDataRepository
-        arguments:
-            - '@doctrine.orm.entity_manager'
-
     user.data.account_creator.handler:
         class: User\Data\Application\Action\Command\AccountCreator
         tags:
@@ -29,13 +18,39 @@ services:
         arguments:
             - '@shared.persistence.repository'
 
-    user.data.user_finder.handler:
-        class: User\Data\Application\Action\Query\UserFinder
+    user.data.show_account_list.rest_controller:
+        public: true
+        class: User\Data\UserInterface\Rest\ShowAccountList
+        arguments:
+            - '@shared.query.bus'
+
+    user.data.account_list_finder.handler:
+        class: User\Data\Application\Action\Query\AccountListFinder
         tags:
             name: messenger.message_handler
-            handles: User\Data\Application\Model\Query\User
+            handles: User\Data\Application\Model\Query\AccountList
         arguments:
             - '@user.data.orm.repository'
+
+    user.data.show_account_data.rest_controller:
+        public: true
+        class: User\Data\UserInterface\Rest\ShowAccountData
+        arguments:
+            - '@shared.query.bus'
+
+    user.data.account_data_finder.handler:
+        class: User\Data\Application\Action\Query\AccountDataFinder
+        tags:
+            name: messenger.message_handler
+            handles: User\Data\Application\Model\Query\ShowAccountModel
+        arguments:
+            - '@user.data.orm.repository'
+
+    user.data.update_account.rest_controller:
+        public: true
+        class: User\Data\UserInterface\Rest\UpdateAccount
+        arguments:
+            - '@shared.command.bus'
 
     user.data.account_updater.handler:
         class: User\Data\Application\Action\Command\AccountUpdater
@@ -46,6 +61,14 @@ services:
             - '@shared.query.bus'
             - '@shared.persistence.repository'
 
+    user.data.user_finder.handler:
+        class: User\Data\Application\Action\Query\UserFinder
+        tags:
+            name: messenger.message_handler
+            handles: User\Data\Application\Model\Query\User
+        arguments:
+            - '@user.data.orm.repository'
+
     user.data.user_collection_finder.handler:
         class: User\Data\Application\Action\Query\UserCollectionFinder
         tags:
@@ -53,3 +76,8 @@ services:
             handles: User\Shared\Application\Model\Query\UserCollection
         arguments:
             - '@user.data.orm.repository'
+
+    user.data.orm.repository:
+        class: User\Data\Infrastructure\Repository\UserDataRepository
+        arguments:
+            - '@doctrine.orm.entity_manager'
