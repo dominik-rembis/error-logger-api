@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Shared\Infrastructure\Proxy\MessageBus\Command;
+namespace Shared\Infrastructure\Proxy\MessageBus;
 
 use Shared\Application\Model\Command\ExampleCommandMock;
 use Shared\Application\Model\Command\ExampleCommandMockImplementingCommandInterface;

@@ -20,10 +20,6 @@ final class UserFinder
     {
         $userData = $this->repository->findOneByUuid(UserDataUuid::fromString($user->getUuid()));
 
-        if (!$userData) {
-            throw new NotFound();
-        }
-
-        return $userData;
+        return $userData ?? throw new NotFound();
     }
 }

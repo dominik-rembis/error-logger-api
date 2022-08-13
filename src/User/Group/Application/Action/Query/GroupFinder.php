@@ -20,10 +20,6 @@ final class GroupFinder
     {
         $group = $this->repository->findOneByUuid(UserGroupUuid::fromString($group->getUuid()));
 
-        if (!$group) {
-            throw new NotFound();
-        }
-
-        return $group;
+        return $group ?? throw new NotFound();
     }
 }

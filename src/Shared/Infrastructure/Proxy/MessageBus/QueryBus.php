@@ -20,6 +20,10 @@ final class QueryBus implements QueryBusInterface
 
     public function handle(QueryInterface $query): mixed
     {
-        return $this->handleQuery($query);
+        try {
+            return $this->handleQuery($query);
+        } catch (\Throwable $throwable) {
+            throw $throwable->getPrevious();
+        }
     }
 }
