@@ -6,7 +6,7 @@ namespace User\Data\UserInterface\Rest;
 
 use Shared\Application\Action\Command\CommandBusInterface;
 use Shared\Infrastructure\Proxy\Response\JsonResponse;
-use User\Data\Application\Model\Command\CreateAccountModel;
+use User\Data\Application\Model\Command\AccountData;
 
 final class CreateAccount
 {
@@ -14,9 +14,9 @@ final class CreateAccount
         private readonly CommandBusInterface $commandBus
     ) {}
 
-    public function __invoke(CreateAccountModel $accountModel): JsonResponse
+    public function __invoke(AccountData $accountData): JsonResponse
     {
-        $this->commandBus->dispatch($accountModel);
+        $this->commandBus->dispatch($accountData);
 
         return new JsonResponse(status: 201);
     }

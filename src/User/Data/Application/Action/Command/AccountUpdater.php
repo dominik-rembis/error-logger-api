@@ -6,7 +6,7 @@ namespace User\Data\Application\Action\Command;
 
 use Shared\Application\Action\Query\QueryBusInterface;
 use Shared\Domain\Repository\PersistenceInterface;
-use User\Data\Application\Model\Command\UpdateAccountModel;
+use User\Data\Application\Model\Command\NewAccountData;
 use User\Data\Application\Model\Query\User;
 
 final class AccountUpdater
@@ -16,12 +16,12 @@ final class AccountUpdater
         private readonly PersistenceInterface $persistence
     ) {}
 
-    public function __invoke(UpdateAccountModel $accountModel): void
+    public function __invoke(NewAccountData $newAccountData): void
     {
-        $userData = $this->queryBus->handle(new User($accountModel->getUuid()));
+        $userData = $this->queryBus->handle(new User((string) $newAccountData->getUuid()));
 
         $this->persistence->save(
-            $userData->setProperties($accountModel->toArray())
+            $userData->setProperties($newAccountData->toArray())
         );
     }
 }

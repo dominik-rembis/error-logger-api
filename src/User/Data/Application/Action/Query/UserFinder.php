@@ -7,7 +7,6 @@ namespace User\Data\Application\Action\Query;
 use Shared\Domain\Exception\NotFound;
 use User\Data\Application\Model\Query\User;
 use User\Data\Domain\Entity\UserData;
-use User\Data\Domain\ObjectValue\UserDataUuid;
 use User\Data\Domain\Repository\UserDataRepositoryInterface;
 
 final class UserFinder
@@ -18,7 +17,7 @@ final class UserFinder
 
     public function __invoke(User $user): UserData
     {
-        $userData = $this->repository->findOneByUuid(UserDataUuid::fromString($user->getUuid()));
+        $userData = $this->repository->findOneByUuid($user->getUuid());
 
         return $userData ?? throw new NotFound();
     }

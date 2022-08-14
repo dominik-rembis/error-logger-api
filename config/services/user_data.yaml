@@ -14,7 +14,7 @@ services:
         class: User\Data\Application\Action\Command\AccountCreator
         tags:
             name: messenger.message_handler
-            handles: User\Data\Application\Model\Command\CreateAccountModel
+            handles: User\Data\Application\Model\Command\AccountData
         arguments:
             - '@shared.persistence.repository'
 
@@ -56,7 +56,7 @@ services:
         class: User\Data\Application\Action\Command\AccountUpdater
         tags:
             name: messenger.message_handler
-            handles: User\Data\Application\Model\Command\UpdateAccountModel
+            handles: User\Data\Application\Model\Command\NewAccountData
         arguments:
             - '@shared.query.bus'
             - '@shared.persistence.repository'

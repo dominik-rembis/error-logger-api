@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace User\Data\Application\Model\Query;
 
 use Shared\Application\Model\Query\QueryInterface;
+use User\Data\Domain\ObjectValue\UserDataUuid;
 
 final class User implements QueryInterface
 {
@@ -12,9 +13,9 @@ final class User implements QueryInterface
         private readonly string $uuid
     ) {}
 
-    public function getUuid(): string
+    public function getUuid(): UserDataUuid
     {
-        return $this->uuid;
+        return UserDataUuid::fromString($this->uuid);
     }
 
     public function getLog(): string
