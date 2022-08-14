@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace User\Application\Action\Query;
+namespace User\Data\Application\Action\Query;
 
 use Shared\Domain\Exception\NotFound;
 use Shared\Infrastructure\Proxy\Test\BaseTestCase;
-use User\Data\Application\Action\Query\UserFinder;
 use User\Data\Application\Model\Query\User;
 use User\Data\Domain\Entity\UserData;
 use User\Data\Domain\ObjectValue\UserDataUuid;

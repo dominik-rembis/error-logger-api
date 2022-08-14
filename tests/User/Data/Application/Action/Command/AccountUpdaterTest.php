@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace User\Application\Action\Command;
+namespace User\Data\Application\Action\Command;
 
 use Shared\Application\Action\Query\QueryBusInterface;
 use Shared\Domain\Repository\PersistenceInterface;
 use Shared\Infrastructure\Proxy\Test\BaseTestCase;
-use User\Data\Application\Action\Command\AccountUpdater;
 use User\Data\Application\Model\Command\NewAccountData;
 use User\Data\Domain\Entity\UserData;
 use User\Data\Domain\ObjectValue\UserDataUuid;

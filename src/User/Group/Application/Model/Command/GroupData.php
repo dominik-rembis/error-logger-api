@@ -6,7 +6,7 @@ namespace User\Group\Application\Model\Command;
 
 use Shared\Application\Model\Command\CommandInterface;
 
-final class CreateGroupModel implements CommandInterface
+final class GroupData implements CommandInterface
 {
     public function __construct(
         private readonly string $name,

@@ -6,7 +6,7 @@ namespace User\Group\UserInterface\Rest;
 
 use Shared\Application\Action\Command\CommandBusInterface;
 use Shared\Infrastructure\Proxy\Response\JsonResponse;
-use User\Group\Application\Model\Command\CreateGroupModel;
+use User\Group\Application\Model\Command\GroupData;
 
 final class CreateGroup
 {
@@ -14,9 +14,9 @@ final class CreateGroup
         private readonly CommandBusInterface $commandBus
     ) {}
 
-    public function __invoke(CreateGroupModel $groupModel): JsonResponse
+    public function __invoke(GroupData $groupData): JsonResponse
     {
-        $this->commandBus->dispatch($groupModel);
+        $this->commandBus->dispatch($groupData);
 
         return new JsonResponse(status: 201);
     }

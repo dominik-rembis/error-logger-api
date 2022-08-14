@@ -7,7 +7,7 @@ namespace User\Group\Application\Action\Command;
 use Shared\Application\Action\Query\QueryBusInterface;
 use Shared\Domain\Repository\PersistenceInterface;
 use User\Group\Application\Factory\UserGroupFactory;
-use User\Group\Application\Model\Command\CreateGroupModel;
+use User\Group\Application\Model\Command\GroupData;
 use User\Shared\Application\Model\Query\UserCollection;
 
 final class GroupCreator
@@ -17,12 +17,12 @@ final class GroupCreator
         private readonly PersistenceInterface $persistence
     ) {}
 
-    public function __invoke(CreateGroupModel $groupModel): void
+    public function __invoke(GroupData $groupData): void
     {
-        $users = $this->queryBus->handle(new UserCollection($groupModel->getUserUuids()));
+        $users = $this->queryBus->handle(new UserCollection($groupData->getUserUuids()));
 
         $this->persistence->save(
-            UserGroupFactory::create($groupModel, $users)
+            UserGroupFactory::create($groupData, $users)
         );
     }
 }

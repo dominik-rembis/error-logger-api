@@ -6,7 +6,7 @@ namespace User\Group\Application\Action\Command;
 
 use Shared\Application\Action\Query\QueryBusInterface;
 use Shared\Domain\Repository\PersistenceInterface;
-use User\Group\Application\Model\Command\UpdateGroupModel;
+use User\Group\Application\Model\Command\GroupNewData;
 use User\Group\Application\Model\Query\Group;
 use User\Shared\Application\Model\Query\UserCollection;
 
@@ -17,13 +17,13 @@ final class GroupUpdater
         private readonly PersistenceInterface $persistence
     ) {}
 
-    public function __invoke(UpdateGroupModel $groupModel): void
+    public function __invoke(GroupNewData $groupNewData): void
     {
-        $group = $this->queryBus->handle(new Group($groupModel->getUuid()));
-        $users = $this->queryBus->handle(new UserCollection($groupModel->getUserUuids()));
+        $group = $this->queryBus->handle(new Group($groupNewData->getUuid()));
+        $users = $this->queryBus->handle(new UserCollection($groupNewData->getUserUuids()));
 
         $group->setProperties([
-            'name' => $groupModel->getName(),
+            'name' => $groupNewData->getName(),
             'users' => $users
         ]);
 

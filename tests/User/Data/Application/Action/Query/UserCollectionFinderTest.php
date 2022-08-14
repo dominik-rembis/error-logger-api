@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace User\Application\Action\Query;
+namespace User\Data\Application\Action\Query;
 
 use Shared\Infrastructure\Proxy\Test\BaseTestCase;
-use User\Data\Application\Action\Query\UserCollectionFinder;
 use User\Data\Domain\Entity\UserData;
 use User\Data\Domain\ObjectValue\UserDataUuid;
 use User\Data\Domain\Repository\UserDataRepositoryInterface;

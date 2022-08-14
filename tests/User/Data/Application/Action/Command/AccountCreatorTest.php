@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace User\Application\Action\Command;
+namespace User\Data\Application\Action\Command;
 
 use Shared\Domain\Repository\PersistenceInterface;
 use Shared\Infrastructure\Proxy\Test\BaseTestCase;
-use User\Data\Application\Action\Command\AccountCreator;
 use User\Data\Application\Model\Command\AccountData;
 use User\Data\Domain\Entity\UserData;
 

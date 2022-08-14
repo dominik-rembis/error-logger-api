@@ -6,7 +6,7 @@ namespace User\Group\Application\Model\Command;
 
 use Shared\Application\Model\Command\CommandInterface;
 
-final class UpdateGroupModel implements CommandInterface
+final class GroupNewData implements CommandInterface
 {
     public function __construct(
         private readonly string $uuid,

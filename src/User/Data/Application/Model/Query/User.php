@@ -20,6 +20,6 @@ final class User implements QueryInterface
 
     public function getLog(): string
     {
-        return sprintf('Searching user with id: %s.', $this->uuid);
+        return sprintf('Searching user with uuid: %s.', $this->uuid);
     }
 }

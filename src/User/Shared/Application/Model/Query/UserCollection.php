@@ -19,6 +19,6 @@ final class UserCollection implements QueryInterface
 
     public function getLog(): string
     {
-        return sprintf('Searching users collection with ids: %s.', implode(', ', $this->uuids));
+        return sprintf('Searching users collection with uuids: %s.', implode(', ', $this->uuids));
     }
 }

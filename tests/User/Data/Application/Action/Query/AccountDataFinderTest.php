@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace User\Application\Action\Query;
+namespace User\Data\Application\Action\Query;
 
 use Shared\Domain\Exception\NotFound;
 use Shared\Infrastructure\Proxy\Test\BaseTestCase;
-use User\Data\Application\Action\Query\AccountDataFinder;
 use User\Data\Application\Dto\AccountDataRow;
 use User\Data\Application\Model\Query\AccountData;
 use User\Data\Domain\Repository\UserDataRepositoryInterface;

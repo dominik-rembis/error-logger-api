@@ -6,7 +6,7 @@ namespace User\Group\UserInterface\Rest;
 
 use Shared\Application\Action\Command\CommandBusInterface;
 use Shared\Infrastructure\Proxy\Response\JsonResponse;
-use User\Group\Application\Model\Command\UpdateGroupModel;
+use User\Group\Application\Model\Command\GroupNewData;
 
 final class UpdateGroup
 {
@@ -14,9 +14,9 @@ final class UpdateGroup
         private readonly CommandBusInterface $commandBus
     ) {}
 
-    public function __invoke(UpdateGroupModel $groupModel): JsonResponse
+    public function __invoke(GroupNewData $groupNewData): JsonResponse
     {
-        $this->commandBus->dispatch($groupModel);
+        $this->commandBus->dispatch($groupNewData);
 
         return new JsonResponse();
     }
