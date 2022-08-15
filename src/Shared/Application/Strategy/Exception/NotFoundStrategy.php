@@ -16,8 +16,8 @@ final class NotFoundStrategy implements ExceptionStrategyInterface
     public function getResponse(): JsonResponse
     {
         return new JsonResponse(
-            $this->throwable->getPrevious()->getMessage(),
-            $this->throwable->getPrevious()->getCode()
+            ($this->throwable?->getPrevious() ?? $this->throwable)->getMessage(),
+            ($this->throwable?->getPrevious() ?? $this->throwable)->getCode()
         );
     }
 }

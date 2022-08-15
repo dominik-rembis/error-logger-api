@@ -10,7 +10,7 @@ final class ResponseContentFactory
     {
         return [
             'status' => $status,
-            ($status === 422 ? 'validation' : (is_string($data) || empty($data) ? 'message' : 'data')) => $data
+            ($status === 422 ? 'validation' : (is_string($data) || is_null($data) ? 'message' : 'data')) => $data
         ];
     }
 }
