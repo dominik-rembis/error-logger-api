@@ -10,7 +10,7 @@ use User\Data\Infrastructure\Fixture\AccountData;
 
 final class ShowAccountDataTest extends BaseWebTestCase
 {
-    private const ENDPOINT_PATH = '/user/list';
+    private const ENDPOINT_PATH = '/user/6dca9476-1dd2-49ff-8fc3-4cbeed1e02ba/data';
 
     private readonly KernelBrowser $client;
 
@@ -21,18 +21,18 @@ final class ShowAccountDataTest extends BaseWebTestCase
         $this->client = self::createClient();
     }
 
-    public function testCaseOfNotFindingUsers(): void
+    public function testCaseOfNotFindingAccountData(): void
     {
         $this->client->request(self::GET, self::ENDPOINT_PATH);
 
-        $this->assertResponseStatusCodeSame(self::OK);
+        $this->assertResponseStatusCodeSame(self::NOT_FOUND);
         $this->assertResponseJsonContent(
-            '{"status":200,"data":[]}',
+            '{"status":404,"message":"The searched value was not found."}',
             $this->client
         );
     }
 
-    public function testCaseOfFindingAccountList(): void
+    public function testCaseOfFindingAccountData(): void
     {
         $this->loadFixtures([AccountData::class => ['uuid' => '6dca9476-1dd2-49ff-8fc3-4cbeed1e02ba']]);
 
@@ -40,7 +40,23 @@ final class ShowAccountDataTest extends BaseWebTestCase
 
         $this->assertResponseStatusCodeSame(self::OK);
         $this->assertResponseJsonContent(
-            '{"status":200,"data":[{"uuid":"6dca9476-1dd2-49ff-8fc3-4cbeed1e02ba","name":"exampleName","surname":"exampleSurname","email":null}]}',
+            '{"status":200,"data":{"uuid":"6dca9476-1dd2-49ff-8fc3-4cbeed1e02ba","name":"exampleName","surname":"exampleSurname","status":true,"email":"example@mail.com"}}',
+            $this->client
+        );
+    }
+
+    public function testCaseOfFindingInactiveAccountData(): void
+    {
+        $this->loadFixtures([AccountData::class => [
+            'uuid' => '6dca9476-1dd2-49ff-8fc3-4cbeed1e02ba',
+            'isActive' => false
+        ]]);
+
+        $this->client->request(self::GET, self::ENDPOINT_PATH);
+
+        $this->assertResponseStatusCodeSame(self::OK);
+        $this->assertResponseJsonContent(
+            '{"status":200,"data":{"uuid":"6dca9476-1dd2-49ff-8fc3-4cbeed1e02ba","name":"exampleName","surname":"exampleSurname","status":false,"email":"example@mail.com"}}',
             $this->client
         );
     }

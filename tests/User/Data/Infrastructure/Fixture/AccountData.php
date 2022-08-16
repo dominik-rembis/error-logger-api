@@ -16,7 +16,8 @@ class AccountData extends AbstractFixture
                 $context['name'] ?? 'exampleName',
                 $context['surname'] ?? 'exampleSurname',
                 $context['email'] ??'example@mail.com',
-                $context['password'] ?? 'exampleHash'
+                $context['password'] ?? 'exampleHash',
+                $context['isActive'] ?? true
             )
         );
     }

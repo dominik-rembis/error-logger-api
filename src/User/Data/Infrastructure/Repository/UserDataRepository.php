@@ -19,6 +19,7 @@ final class UserDataRepository extends AbstractRepository implements UserDataRep
             ->select('ud.uuid')
             ->addSelect('ud.name')
             ->addSelect('ud.surname')
+            ->addSelect('ud.is_active as status')
             ->from('user_data', 'ud')
             ->fetchAllAssociative();
     }
@@ -32,6 +33,7 @@ final class UserDataRepository extends AbstractRepository implements UserDataRep
             ->addSelect('ud.name')
             ->addSelect('ud.surname')
             ->addSelect('ud.email')
+            ->addSelect('ud.is_active as status')
             ->from('user_data', 'ud')
             ->where($qb->expr()->in('ud.uuid', ':userUuid'))
             ->setParameter('userUuid', $uuid, 'uuid')

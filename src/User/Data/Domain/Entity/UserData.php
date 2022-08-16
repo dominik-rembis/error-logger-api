@@ -14,6 +14,7 @@ final class UserData extends AggregateRoot
         private string $name,
         private string $surname,
         private string $email,
-        private string $password
+        private string $password,
+        private bool $isActive = true
     ) {}
 }

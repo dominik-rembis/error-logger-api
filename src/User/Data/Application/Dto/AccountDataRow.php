@@ -12,7 +12,8 @@ final class AccountDataRow
         private readonly string $uuid,
         private readonly string $name,
         private readonly string $surname,
-        private readonly ?string $email = null,
+        private readonly int $status,
+        private readonly ?string $email = null
     ) {}
 
     public function getUuid(): string
@@ -28,6 +29,11 @@ final class AccountDataRow
     public function getSurname(): string
     {
         return $this->surname;
+    }
+
+    public function getStatus(): bool
+    {
+        return (bool) $this->status;
     }
 
     public function getEmail(): ?string

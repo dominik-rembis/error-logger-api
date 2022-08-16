@@ -63,11 +63,13 @@ final class GroupDataFinderTest extends BaseTestCase
                 'name' => 'example',
                 'firstname' => 'exampleName1',
                 'surname' => 'exampleSurname1',
+                'status' => 1
             ], [
                 'uuid' => 'exampleUuid2',
                 'name' => 'example',
                 'firstname' => 'exampleName2',
                 'surname' => 'exampleSurname2',
+                'status' => 1
             ]
         ];
     }

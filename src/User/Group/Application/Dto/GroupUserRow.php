@@ -11,7 +11,7 @@ final class GroupUserRow
     public function __construct(
         private readonly string $uuid,
         private readonly string $name,
-        private readonly string $surname,
+        private readonly string $surname
     ) {}
 
     public function getUuid(): string

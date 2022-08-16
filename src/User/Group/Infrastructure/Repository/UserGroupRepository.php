@@ -21,7 +21,7 @@ final class UserGroupRepository extends AbstractRepository implements UserGroupR
             ->addSelect('COUNT(ud.name) as userCount')
             ->from('user_group', 'ug')
             ->leftJoin('ug', 'user_group_aggregate', 'uga', 'ug.uuid = uga.user_group_uuid')
-            ->leftJoin('uga', 'user_data', 'ud', 'uga.user_data_uuid = ud.uuid')
+            ->leftJoin('uga', 'user_data', 'ud', 'uga.user_data_uuid = ud.uuid AND ud.is_active = 1')
             ->groupBy('ug.uuid')
             ->orderBy('ug.name', 'ASC')
             ->fetchAllAssociative();
@@ -38,7 +38,7 @@ final class UserGroupRepository extends AbstractRepository implements UserGroupR
             ->addSelect('ud.surname')
             ->from('user_group', 'ug')
             ->leftJoin('ug', 'user_group_aggregate', 'uga', 'ug.uuid = uga.user_group_uuid')
-            ->leftJoin('uga', 'user_data', 'ud', 'uga.user_data_uuid = ud.uuid')
+            ->leftJoin('uga', 'user_data', 'ud', 'uga.user_data_uuid = ud.uuid AND ud.is_active = 1')
             ->where($qb->expr()->eq('ug.uuid', ':groupUuid'))
             ->setParameter('groupUuid', $uuid, 'uuid')
             ->fetchAllAssociative();

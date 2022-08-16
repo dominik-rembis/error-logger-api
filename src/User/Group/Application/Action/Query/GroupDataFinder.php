@@ -23,13 +23,13 @@ final class GroupDataFinder
 
             return new GroupDataRow(
                 reset($groupData)['name'],
-                array_map(
-                    fn(array $user): GroupUserRow => new GroupUserRow(
-                        $user['uuid'],
-                        $user['firstname'],
-                        $user['surname']
-                    ),
-                    $groupData
+                array_filter(
+                    array_map(
+                        fn(array $user): ?GroupUserRow => $user['uuid']
+                            ? new GroupUserRow($user['uuid'], $user['firstname'], $user['surname'])
+                            : null,
+                        $groupData
+                    )
                 )
             );
         } catch (\Throwable) {

@@ -27,7 +27,8 @@ final class Group extends AbstractFixture
                         $context['userName'] ?? 'exampleName',
                         $context['userSurname'] ?? 'exampleSurname',
                         $context['userEmail'] ?? 'example@mail.com',
-                        'exampleHash'
+                        'exampleHash',
+                        $context['userIsActive'] ?? true
                     )
                 ])
             )

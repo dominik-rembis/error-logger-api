@@ -2,7 +2,7 @@
 <routes xmlns="http://symfony.com/schema/routing">
     <route
         id="show_account_list"
-        path="/user/list"
+        path="/user/data"
         methods="GET"
         controller="user.data.show_account_list.rest_controller"
     />

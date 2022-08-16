@@ -47,4 +47,18 @@ final class ShowGroupDataTest extends BaseWebTestCase
             $this->client
         );
     }
+
+    public function testCaseOfFindingGroupDataWhenUserHasBeenInactive(): void
+    {
+        $this->loadFixtures([Group::class => [
+            'groupUuid' => '6dca9476-1dd2-49ff-8fc3-4cbeed1e02ba',
+            'userUuid' => '0053bf63-cc69-48eb-9b1c-09f52185d627',
+            'userIsActive' => false
+        ]]);
+
+        $this->client->request(self::GET, self::ENDPOINT_PATH);
+
+        $this->assertResponseStatusCodeSame(self::OK);
+        $this->assertResponseJsonContent('{"status":200,"data":{"name":"exampleName","users":[]}}', $this->client);
+    }
 }

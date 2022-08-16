@@ -30,10 +30,12 @@ final class AccountListFinderTest extends BaseTestCase
                 'uuid' => 'exampleUuid',
                 'name' => 'exampleName',
                 'surname' => 'exampleSurname',
+                'status' => 1
             ], [
                 'uuid' => 'exampleUuid',
                 'name' => 'exampleName',
                 'surname' => 'exampleSurname',
+                'status' => 1
             ]
         ]);
 

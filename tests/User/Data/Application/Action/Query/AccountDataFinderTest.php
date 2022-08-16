@@ -29,6 +29,7 @@ final class AccountDataFinderTest extends BaseTestCase
             'uuid' => 'exampleUuid',
             'name' => 'exampleName',
             'surname' => 'exampleSurname',
+            'status' => 1,
             'email' => 'example@mail.com'
         ]);
 
