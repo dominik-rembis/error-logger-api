@@ -7,7 +7,7 @@ namespace User\Account\Application\Model\Query;
 use Shared\Application\Model\Query\QueryInterface;
 use User\Account\Domain\ObjectValue\AccountUuid;
 
-final class Account implements QueryInterface
+final class AccountEntity implements QueryInterface
 {
     public function __construct(
         private readonly string $uuid
@@ -20,6 +20,6 @@ final class Account implements QueryInterface
 
     public function getLog(): string
     {
-        return sprintf('Searching user account with uuid: %s.', $this->uuid);
+        return sprintf('Searching account entity with uuid: %s.', $this->uuid);
     }
 }

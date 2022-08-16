@@ -77,18 +77,18 @@ services:
             - '@shared.persistence.repository'
 
     user.account.user_finder.handler:
-        class: User\Account\Application\Action\Query\AccountFinder
+        class: User\Account\Application\Action\Query\AccountEntityFinder
         tags:
             name: messenger.message_handler
-            handles: User\Account\Application\Model\Query\Account
+            handles: User\Account\Application\Model\Query\AccountEntity
         arguments:
             - '@user.account.orm.repository'
 
     user.account.user_collection_finder.handler:
-        class: User\Account\Application\Action\Query\AccountCollectionFinder
+        class: User\Account\Application\Action\Query\AccountEntityCollectionFinder
         tags:
             name: messenger.message_handler
-            handles: User\Shared\Application\Model\Query\AccountCollection
+            handles: User\Shared\Application\Model\Query\AccountEntityCollection
         arguments:
             - '@user.account.orm.repository'
 

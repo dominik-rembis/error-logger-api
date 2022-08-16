@@ -8,7 +8,7 @@ use Shared\Application\Action\Query\QueryBusInterface;
 use Shared\Domain\Repository\PersistenceInterface;
 use User\Group\Application\Factory\UserGroupFactory;
 use User\Group\Application\Model\Command\GroupData;
-use User\Shared\Application\Model\Query\AccountCollection;
+use User\Shared\Application\Model\Query\AccountEntityCollection;
 
 final class GroupCreator
 {
@@ -19,10 +19,10 @@ final class GroupCreator
 
     public function __invoke(GroupData $groupData): void
     {
-        $users = $this->queryBus->handle(new AccountCollection($groupData->getUserUuids()));
+        $accountCollection = $this->queryBus->handle(new AccountEntityCollection($groupData->getUserUuids()));
 
         $this->persistence->save(
-            UserGroupFactory::create($groupData, $users)
+            UserGroupFactory::create($groupData, $accountCollection)
         );
     }
 }

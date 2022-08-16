@@ -8,8 +8,8 @@ use Shared\Infrastructure\Proxy\Test\BaseTestCase;
 use User\Account\Domain\Entity\Account;
 use User\Account\Domain\ObjectValue\AccountUuid;
 use User\Account\Domain\Repository\AccountRepositoryInterface;
-use User\Shared\Application\Model\Query\AccountCollection;
-use User\Shared\Domain\Collection\AccountCollection as Collection;
+use User\Shared\Application\Model\Query\AccountEntityCollection;
+use User\Shared\Domain\Collection\AccountCollection;
 
 final class UserCollectionFinderTest extends BaseTestCase
 {
@@ -34,7 +34,7 @@ final class UserCollectionFinderTest extends BaseTestCase
         $result = $this->executeHandler();
 
         $this->assertCount(1, $result);
-        $this->assertInstanceOf(Collection::class, $result);
+        $this->assertInstanceOf(AccountCollection::class, $result);
     }
 
     public function testCaseOfRecordsNotFound(): void
@@ -44,12 +44,12 @@ final class UserCollectionFinderTest extends BaseTestCase
         $result = $this->executeHandler();
 
         $this->assertCount(0, $result);
-        $this->assertInstanceOf(Collection::class, $result);
+        $this->assertInstanceOf(AccountCollection::class, $result);
     }
 
-    private function executeHandler(): Collection
+    private function executeHandler(): AccountCollection
     {
-        $handler = new AccountCollectionFinder($this->repository);
-        return $handler->__invoke(new AccountCollection([self::EXAMPLE_UUID]));
+        $handler = new AccountEntityCollectionFinder($this->repository);
+        return $handler->__invoke(new AccountEntityCollection([self::EXAMPLE_UUID]));
     }
 }

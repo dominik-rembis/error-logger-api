@@ -7,7 +7,7 @@ namespace User\Account\Application\Action\Command;
 use Shared\Application\Action\Query\QueryBusInterface;
 use Shared\Domain\Repository\PersistenceInterface;
 use User\Account\Application\Model\Command\AccountStatus;
-use User\Account\Application\Model\Query\Account;
+use User\Account\Application\Model\Query\AccountEntity;
 
 final class StatusUpdater
 {
@@ -18,7 +18,7 @@ final class StatusUpdater
 
     public function __invoke(AccountStatus $accountStatus): void
     {
-        $userData = $this->queryBus->handle(new Account($accountStatus->getUuid()));
+        $userData = $this->queryBus->handle(new AccountEntity($accountStatus->getUuid()));
 
         $userData->setProperties($accountStatus->toArray());
 

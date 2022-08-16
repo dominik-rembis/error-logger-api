@@ -6,7 +6,7 @@ namespace User\Account\Application\Action\Query;
 
 use Shared\Domain\Exception\NotFound;
 use Shared\Infrastructure\Proxy\Test\BaseTestCase;
-use User\Account\Application\Model\Query\Account as AccountQuery;
+use User\Account\Application\Model\Query\AccountEntity;
 use User\Account\Domain\Entity\Account;
 use User\Account\Domain\ObjectValue\AccountUuid;
 use User\Account\Domain\Repository\AccountRepositoryInterface;
@@ -46,7 +46,7 @@ final class UserFinderTest extends BaseTestCase
 
     private function executeHandler(): Account
     {
-        $handler = new AccountFinder($this->repository);
-        return $handler->__invoke(new AccountQuery(self::EXAMPLE_UUID));
+        $handler = new AccountEntityFinder($this->repository);
+        return $handler->__invoke(new AccountEntity(self::EXAMPLE_UUID));
     }
 }

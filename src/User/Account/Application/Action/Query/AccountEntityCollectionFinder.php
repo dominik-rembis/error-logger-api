@@ -6,20 +6,20 @@ namespace User\Account\Application\Action\Query;
 
 use User\Account\Domain\ObjectValue\AccountUuid;
 use User\Account\Domain\Repository\AccountRepositoryInterface;
-use User\Shared\Application\Model\Query\AccountCollection;
-use User\Shared\Domain\Collection\AccountCollection as Collection;
+use User\Shared\Application\Model\Query\AccountEntityCollection;
+use User\Shared\Domain\Collection\AccountCollection;
 
-final class AccountCollectionFinder
+final class AccountEntityCollectionFinder
 {
     public function __construct(
         private readonly AccountRepositoryInterface $repository
     ) {}
 
-    public function __invoke(AccountCollection $accountCollection): Collection
+    public function __invoke(AccountEntityCollection $accountEntityCollection): AccountCollection
     {
-        $uuids = self::toObjectValue($accountCollection->getUuids());
+        $uuids = self::toObjectValue($accountEntityCollection->getUuids());
 
-        return new Collection(
+        return new AccountCollection(
             $this->repository->findAllByUuids(...$uuids)
         );
     }
