@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace User\Data\UserInterface\Rest;
+namespace User\Group\UserInterface\Rest;
 
 use Shared\Infrastructure\Proxy\Test\BaseWebTestCase;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use User\Data\Infrastructure\Fixture\AccountData;
+use User\Group\Infrastructure\Fixture\Group;
 
-final class ShowAccountListTest extends BaseWebTestCase
+final class ShowGroupDataTest extends BaseWebTestCase
 {
-    private const ENDPOINT_PATH = '/user/6dca9476-1dd2-49ff-8fc3-4cbeed1e02ba/data';
+    private const ENDPOINT_PATH = '/user/group/6dca9476-1dd2-49ff-8fc3-4cbeed1e02ba';
 
-    private readonly KernelBrowser $client;
+    private KernelBrowser $client;
 
     protected function setUp(): void
     {
@@ -21,7 +21,7 @@ final class ShowAccountListTest extends BaseWebTestCase
         $this->client = self::createClient();
     }
 
-    public function testCaseOfNotFindingAccountData(): void
+    public function testCaseOfNotFindingGroupData(): void
     {
         $this->client->request(self::GET, self::ENDPOINT_PATH);
 
@@ -32,15 +32,18 @@ final class ShowAccountListTest extends BaseWebTestCase
         );
     }
 
-    public function testCaseOfFindingAccountData(): void
+    public function testCaseOfFindingGroupData(): void
     {
-        $this->loadFixtures([AccountData::class => ['uuid' => '6dca9476-1dd2-49ff-8fc3-4cbeed1e02ba']]);
+        $this->loadFixtures([Group::class => [
+            'groupUuid' => '6dca9476-1dd2-49ff-8fc3-4cbeed1e02ba',
+            'userUuid' => '0053bf63-cc69-48eb-9b1c-09f52185d627'
+        ]]);
 
         $this->client->request(self::GET, self::ENDPOINT_PATH);
 
         $this->assertResponseStatusCodeSame(self::OK);
         $this->assertResponseJsonContent(
-            '{"status":200,"data":{"uuid":"6dca9476-1dd2-49ff-8fc3-4cbeed1e02ba","name":"exampleName","surname":"exampleSurname","email":"example@mail.com"}}',
+            '{"status":200,"data":{"name":"exampleName","users":[{"uuid":"0053bf63-cc69-48eb-9b1c-09f52185d627","name":"exampleName","surname":"exampleSurname"}]}}',
             $this->client
         );
     }

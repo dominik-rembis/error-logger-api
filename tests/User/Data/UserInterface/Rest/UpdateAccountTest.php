@@ -7,7 +7,7 @@ namespace User\Data\UserInterface\Rest;
 use Shared\Infrastructure\Proxy\Test\BaseWebTestCase;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use User\Data\Domain\Entity\UserData;
-use User\Data\Infrastructure\Fixture\Query\AccountData;
+use User\Data\Infrastructure\Fixture\AccountData;
 
 final class UpdateAccountTest extends BaseWebTestCase
 {

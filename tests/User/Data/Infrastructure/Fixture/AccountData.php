@@ -1,6 +1,6 @@
 <?php
 
-namespace User\Data\Infrastructure\Fixture\Query;
+namespace User\Data\Infrastructure\Fixture;
 
 use Shared\Infrastructure\Adapter\Fixture\AbstractFixture;
 use User\Data\Domain\Entity\UserData;

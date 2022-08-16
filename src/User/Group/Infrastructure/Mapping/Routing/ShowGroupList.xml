@@ -2,7 +2,7 @@
 <routes xmlns="http://symfony.com/schema/routing">
     <route
         id="show_group_list"
-        path="/user/group/list"
+        path="/user/group"
         methods="GET"
         controller="user.group.show_group_list.rest_controller"
     />
