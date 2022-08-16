@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes xmlns="http://symfony.com/schema/routing">
+    <route
+        id="create_account"
+        path="/user/account"
+        methods="POST"
+        controller="user.account.create_account.rest_controller"
+    />
+</routes>

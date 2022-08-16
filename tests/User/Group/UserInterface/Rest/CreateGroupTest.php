@@ -6,7 +6,7 @@ namespace User\Group\UserInterface\Rest;
 
 use Shared\Infrastructure\Proxy\Test\BaseWebTestCase;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use User\Data\Infrastructure\Fixture\AccountData;
+use User\Account\Infrastructure\Fixture\AccountData;
 use User\Group\Domain\Entity\UserGroup;
 use User\Group\Infrastructure\Fixture\Group;
 

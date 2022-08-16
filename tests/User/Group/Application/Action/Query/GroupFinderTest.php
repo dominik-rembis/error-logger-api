@@ -10,7 +10,7 @@ use User\Group\Application\Model\Query\Group;
 use User\Group\Domain\Entity\UserGroup;
 use User\Group\Domain\ObjectValue\UserGroupUuid;
 use User\Group\Domain\Repository\UserGroupRepositoryInterface;
-use User\Shared\Domain\Collection\UserDataCollection;
+use User\Shared\Domain\Collection\AccountCollection;
 
 final class GroupFinderTest extends BaseTestCase
 {
@@ -28,7 +28,7 @@ final class GroupFinderTest extends BaseTestCase
         $this->repository->method('findOneByUuid')->willReturn(new UserGroup(
             UserGroupUuid::generate(),
             'example',
-            new UserDataCollection([])
+            new AccountCollection([])
         ));
 
         $handler = new GroupFinder($this->repository);

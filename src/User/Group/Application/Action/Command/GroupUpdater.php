@@ -8,7 +8,7 @@ use Shared\Application\Action\Query\QueryBusInterface;
 use Shared\Domain\Repository\PersistenceInterface;
 use User\Group\Application\Model\Command\GroupNewData;
 use User\Group\Application\Model\Query\Group;
-use User\Shared\Application\Model\Query\UserCollection;
+use User\Shared\Application\Model\Query\AccountCollection;
 
 final class GroupUpdater
 {
@@ -20,7 +20,7 @@ final class GroupUpdater
     public function __invoke(GroupNewData $groupNewData): void
     {
         $group = $this->queryBus->handle(new Group($groupNewData->getUuid()));
-        $users = $this->queryBus->handle(new UserCollection($groupNewData->getUserUuids()));
+        $users = $this->queryBus->handle(new AccountCollection($groupNewData->getUserUuids()));
 
         $group->setProperties([
             'name' => $groupNewData->getName(),

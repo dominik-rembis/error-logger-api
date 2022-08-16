@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace User\Group\Domain\Entity;
 
 use Shared\Domain\Entity\AggregateRoot;
-use User\Shared\Domain\Collection\UserDataCollection;
+use User\Shared\Domain\Collection\AccountCollection;
 use User\Group\Domain\ObjectValue\UserGroupUuid;
 
 final class UserGroup extends AggregateRoot
@@ -15,7 +15,7 @@ final class UserGroup extends AggregateRoot
     public function __construct(
         private UserGroupUuid $uuid,
         private string $name,
-        UserDataCollection $users
+        AccountCollection $users
     ) {
         $this->users = $users;
     }

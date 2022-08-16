@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<routes xmlns="http://symfony.com/schema/routing">
-    <route
-        id="show_account_data"
-        path="/user/{uuid}/data"
-        methods="GET"
-        controller="user.data.show_account_data.rest_controller"
-    />
-</routes>

@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace User\Group\Infrastructure\Fixture;
 
 use Shared\Infrastructure\Adapter\Fixture\AbstractFixture;
-use User\Data\Domain\Entity\UserData;
-use User\Data\Domain\ObjectValue\UserDataUuid;
+use User\Account\Domain\Entity\Account;
+use User\Account\Domain\ObjectValue\AccountUuid;
 use User\Group\Domain\Entity\UserGroup;
 use User\Group\Domain\ObjectValue\UserGroupUuid;
-use User\Shared\Domain\Collection\UserDataCollection;
+use User\Shared\Domain\Collection\AccountCollection;
 
 final class Group extends AbstractFixture
 {
@@ -19,11 +19,11 @@ final class Group extends AbstractFixture
             new UserGroup(
                 UserGroupUuid::fromString($context['groupUuid']),
                 $context['groupName'] ?? 'exampleName',
-                new UserDataCollection([
-                    new UserData(
+                new AccountCollection([
+                    new Account(
                         isset($context['userUuid'])
-                            ? UserDataUuid::fromString($context['userUuid'])
-                            : UserDataUuid::generate(),
+                            ? AccountUuid::fromString($context['userUuid'])
+                            : AccountUuid::generate(),
                         $context['userName'] ?? 'exampleName',
                         $context['userSurname'] ?? 'exampleSurname',
                         $context['userEmail'] ?? 'example@mail.com',

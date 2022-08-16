@@ -2,7 +2,7 @@ doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
         types:
-            user_data_uuid: User\Data\Infrastructure\Util\Orm\Type\UserDataUuidType
+            account_uuid: User\Account\Infrastructure\Util\Orm\Type\AccountUuidType
             user_group_uuid: User\Group\Infrastructure\Util\Orm\Type\UserDataUuidType
 
     orm:
@@ -10,12 +10,12 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            User\Data:
+            User\Account:
                 is_bundle: false
                 type: xml
-                dir: '%kernel.project_dir%/src/User/Data/Infrastructure/Mapping/Orm'
-                prefix: 'User\Data\Domain\Entity'
-                alias: User\Data
+                dir: '%kernel.project_dir%/src/User/Account/Infrastructure/Mapping/Orm'
+                prefix: 'User\Account\Domain\Entity'
+                alias: User\Account
             User\Group:
                 is_bundle: false
                 type: xml

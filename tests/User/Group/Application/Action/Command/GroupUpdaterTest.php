@@ -11,7 +11,7 @@ use User\Group\Application\Model\Command\GroupNewData;
 use User\Group\Application\Model\Query\Group;
 use User\Group\Domain\Entity\UserGroup;
 use User\Group\Domain\ObjectValue\UserGroupUuid;
-use User\Shared\Domain\Collection\UserDataCollection;
+use User\Shared\Domain\Collection\AccountCollection;
 
 final class GroupUpdaterTest extends BaseTestCase
 {
@@ -33,7 +33,7 @@ final class GroupUpdaterTest extends BaseTestCase
                 return self::getUserGroupMock();
             }
 
-            return new UserDataCollection([]);
+            return new AccountCollection([]);
         });
 
         $this->persistence
@@ -47,7 +47,7 @@ final class GroupUpdaterTest extends BaseTestCase
 
     private static function getUserGroupMock(): UserGroup
     {
-        return new UserGroup(UserGroupUuid::generate(), 'example', new UserDataCollection([]));
+        return new UserGroup(UserGroupUuid::generate(), 'example', new AccountCollection([]));
     }
 
     private static function getGroupNewDataMock(): GroupNewData

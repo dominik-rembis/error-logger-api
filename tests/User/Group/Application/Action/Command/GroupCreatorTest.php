@@ -9,7 +9,7 @@ use Shared\Domain\Repository\PersistenceInterface;
 use Shared\Infrastructure\Proxy\Test\BaseTestCase;
 use User\Group\Application\Model\Command\GroupData;
 use User\Group\Domain\Entity\UserGroup;
-use User\Shared\Domain\Collection\UserDataCollection;
+use User\Shared\Domain\Collection\AccountCollection;
 
 final class GroupCreatorTest extends BaseTestCase
 {
@@ -26,7 +26,7 @@ final class GroupCreatorTest extends BaseTestCase
 
     public function testCaseOfCreatingNewUserGroup(): void
     {
-        $this->queryBus->method('handle')->willReturn(new UserDataCollection([]));
+        $this->queryBus->method('handle')->willReturn(new AccountCollection([]));
         $this->persistence
             ->expects($this->once())
             ->method('save')

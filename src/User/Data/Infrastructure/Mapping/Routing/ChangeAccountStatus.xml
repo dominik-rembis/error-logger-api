@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<routes xmlns="http://symfony.com/schema/routing">
-    <route
-        id="change_account_status"
-        path="/user/{uuid}/status"
-        methods="PUT"
-        controller="user.data.change_account_status.rest_controller"
-    />
-</routes>

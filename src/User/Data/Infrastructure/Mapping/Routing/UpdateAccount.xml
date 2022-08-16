@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<routes xmlns="http://symfony.com/schema/routing">
-    <route
-        id="update_account_data"
-        path="/user/{uuid}/data"
-        methods="PUT"
-        controller="user.data.update_account.rest_controller"
-    />
-</routes>

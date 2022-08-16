@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping>
+    <entity name="User\Account\Domain\Entity\Account">
+        <id name="uuid" type="account_uuid"/>
+
+        <field name="name" type="string" length="50"/>
+        <field name="surname" type="string" length="50"/>
+        <field name="email" type="string" length="100" unique="true"/>
+        <field name="password" type="string" length="96"/>
+        <field name="isActive" type="boolean">
+            <options>
+                <option name="default">1</option>
+            </options>
+        </field>
+    </entity>
+</doctrine-mapping>

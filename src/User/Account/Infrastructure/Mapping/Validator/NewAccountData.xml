@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping">
+    <class name="User\Account\Application\Model\Command\NewAccountData">
+        <property name="name">
+            <constraint name="NotBlank"/>
+            <constraint name="Regex">
+                <option name="pattern">/^\w+$/</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="max">50</option>
+            </constraint>
+        </property>
+        <property name="surname">
+            <constraint name="NotBlank"/>
+            <constraint name="Regex">
+                <option name="pattern">/^\w+$/</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="max">50</option>
+            </constraint>
+        </property>
+        <property name="email">
+            <constraint name="Length">
+                <option name="min">1</option>
+                <option name="max">100</option>
+            </constraint>
+            <constraint name="Email"/>
+            <constraint name="Shared\Application\Model\Validator\UniqueValue">
+                <option name="entityClass">User\Account\Domain\Entity\Account</option>
+                <option name="columnName">email</option>
+                <option name="excludeByColumn">uuid</option>
+                <option name="excludedValueCallback">getUuid</option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

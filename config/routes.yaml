@@ -1,5 +1,5 @@
 user_data:
-    resource: ../src/User/Data/Infrastructure/Mapping/Routing/
+    resource: ../src/User/Account/Infrastructure/Mapping/Routing/
     type: directory
 
 user_group:

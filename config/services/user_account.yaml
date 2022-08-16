@@ -1,0 +1,98 @@
+services:
+    _defaults:
+        autowire: false
+        autoconfigure: false
+        public: false
+
+    user.account.create_account.rest_controller:
+        public: true
+        class: User\Account\UserInterface\Rest\CreateAccount
+        arguments:
+            - '@shared.command.bus'
+
+    user.account.account_creator.handler:
+        class: User\Account\Application\Action\Command\AccountCreator
+        tags:
+            name: messenger.message_handler
+            handles: User\Account\Application\Model\Command\AccountData
+        arguments:
+            - '@shared.persistence.repository'
+
+    user.account.show_account_list.rest_controller:
+        public: true
+        class: User\Account\UserInterface\Rest\ShowAccountList
+        arguments:
+            - '@shared.query.bus'
+
+    user.account.account_list_finder.handler:
+        class: User\Account\Application\Action\Query\AccountListFinder
+        tags:
+            name: messenger.message_handler
+            handles: User\Account\Application\Model\Query\AccountList
+        arguments:
+            - '@user.account.orm.repository'
+
+    user.account.show_account_data.rest_controller:
+        public: true
+        class: User\Account\UserInterface\Rest\ShowAccountData
+        arguments:
+            - '@shared.query.bus'
+
+    user.account.account_data_finder.handler:
+        class: User\Account\Application\Action\Query\AccountDataFinder
+        tags:
+            name: messenger.message_handler
+            handles: User\Account\Application\Model\Query\ShowAccountModel
+        arguments:
+            - '@user.account.orm.repository'
+
+    user.account.update_account.rest_controller:
+        public: true
+        class: User\Account\UserInterface\Rest\UpdateAccount
+        arguments:
+            - '@shared.command.bus'
+
+    user.account.account_updater.handler:
+        class: User\Account\Application\Action\Command\AccountUpdater
+        tags:
+            name: messenger.message_handler
+            handles: User\Account\Application\Model\Command\NewAccountData
+        arguments:
+            - '@shared.query.bus'
+            - '@shared.persistence.repository'
+
+    user.account.change_account_status.rest_controller:
+        public: true
+        class: User\Account\UserInterface\Rest\ChangeAccountStatus
+        arguments:
+            - '@shared.command.bus'
+
+    user.account.account_status_updater.handler:
+        class: User\Account\Application\Action\Command\StatusUpdater
+        tags:
+            name: messenger.message_handler
+            handles: User\Account\Application\Model\Command\AccountStatus
+        arguments:
+            - '@shared.query.bus'
+            - '@shared.persistence.repository'
+
+    user.account.user_finder.handler:
+        class: User\Account\Application\Action\Query\AccountFinder
+        tags:
+            name: messenger.message_handler
+            handles: User\Account\Application\Model\Query\Account
+        arguments:
+            - '@user.account.orm.repository'
+
+    user.account.user_collection_finder.handler:
+        class: User\Account\Application\Action\Query\AccountCollectionFinder
+        tags:
+            name: messenger.message_handler
+            handles: User\Shared\Application\Model\Query\AccountCollection
+        arguments:
+            - '@user.account.orm.repository'
+
+    user.account.orm.repository:
+        class: User\Account\Infrastructure\Repository\AccountRepository
+        arguments:
+            - '@doctrine.orm.entity_manager'
