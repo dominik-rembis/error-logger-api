@@ -3,5 +3,5 @@ user_data:
     type: directory
 
 user_group:
-    resource: ../src/User/Group/Infrastructure/Mapping/Routing/
+    resource: ../src/User/Aggregate/Infrastructure/Mapping/Routing/
     type: directory

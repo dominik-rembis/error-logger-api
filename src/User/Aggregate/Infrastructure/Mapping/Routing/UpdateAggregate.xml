@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes xmlns="http://symfony.com/schema/routing">
+    <route
+        id="update_user_aggregate"
+        path="/user/aggregate/{uuid}"
+        methods="PUT"
+        controller="user.aggregate.update_aggregate.rest_controller"
+    />
+</routes>

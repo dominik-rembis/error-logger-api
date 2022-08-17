@@ -3,7 +3,7 @@ doctrine:
         url: '%env(resolve:DATABASE_URL)%'
         types:
             account_uuid: User\Account\Infrastructure\Util\Orm\Type\AccountUuidType
-            user_group_uuid: User\Group\Infrastructure\Util\Orm\Type\UserDataUuidType
+            aggregate_uuid: User\Aggregate\Infrastructure\Util\Orm\Type\AggregateUuidType
 
     orm:
         auto_generate_proxy_classes: true
@@ -16,12 +16,12 @@ doctrine:
                 dir: '%kernel.project_dir%/src/User/Account/Infrastructure/Mapping/Orm'
                 prefix: 'User\Account\Domain\Entity'
                 alias: User\Account
-            User\Group:
+            User\Aggregate:
                 is_bundle: false
                 type: xml
-                dir: '%kernel.project_dir%/src/User/Group/Infrastructure/Mapping/Orm'
-                prefix: 'User\Group\Domain\Entity'
-                alias: User\Group
+                dir: '%kernel.project_dir%/src/User/Aggregate/Infrastructure/Mapping/Orm'
+                prefix: 'User\Aggregate\Domain\Entity'
+                alias: User\Aggregate
 
 when@test:
     doctrine:

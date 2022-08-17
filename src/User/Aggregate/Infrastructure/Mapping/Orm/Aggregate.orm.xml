@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping>
+    <entity name="User\Aggregate\Domain\Entity\Aggregate">
+        <id name="uuid" type="aggregate_uuid"/>
+
+        <field name="name" type="string" length="50" unique="true"/>
+
+        <many-to-many field="accounts" target-entity="User\Account\Domain\Entity\Account">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+            <join-table name="account_aggregate">
+                <join-columns>
+                    <join-column name="aggregate_uuid" referenced-column-name="uuid"/>
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="account_uuid" referenced-column-name="uuid"/>
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+    </entity>
+</doctrine-mapping>

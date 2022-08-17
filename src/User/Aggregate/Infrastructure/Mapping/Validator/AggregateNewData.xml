@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping">
+    <class name="User\Aggregate\Application\Model\Command\AggregateNewData">
+        <property name="name">
+            <constraint name="NotBlank"/>
+            <constraint name="Length">
+                <option name="max">50</option>
+            </constraint>
+            <constraint name="Shared\Application\Model\Validator\UniqueValue">
+                <option name="entityClass">User\Aggregate\Domain\Entity\Aggregate</option>
+                <option name="columnName">name</option>
+                <option name="excludeByColumn">uuid</option>
+                <option name="excludedValueCallback">getUuid</option>
+            </constraint>
+        </property>
+        <property name="accountUuids">
+            <constraint name="All">
+                <option name="constraints">
+                    <constraint name="Uuid"/>
+                </option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

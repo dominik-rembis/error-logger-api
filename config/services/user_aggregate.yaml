@@ -1,0 +1,76 @@
+services:
+    _defaults:
+        autowire: false
+        autoconfigure: false
+        public: false
+
+    user.aggregate.create_aggregate.rest_controller:
+        public: true
+        class: User\Aggregate\UserInterface\Rest\CreateAggregate
+        arguments:
+            - '@shared.command.bus'
+
+    user.aggregate.aggregate_creator.handler:
+        class: User\Aggregate\Application\Action\Command\AggregateCreator
+        tags:
+            name: messenger.message_handler
+            handles: User\Aggregate\Application\Model\Command\AggregateData
+        arguments:
+            - '@shared.query.bus'
+            - '@shared.persistence.repository'
+
+    user.aggregate.show_aggregate_list.rest_controller:
+        public: true
+        class: User\Aggregate\UserInterface\Rest\ShowAggregateList
+        arguments:
+            - '@shared.query.bus'
+
+    user.aggregate.aggregate_list_finder.handler:
+        class: User\Aggregate\Application\Action\Query\AggregateListFinder
+        tags:
+            name: messenger.message_handler
+            handles: User\Aggregate\Application\Model\Query\AggregateList
+        arguments:
+            - '@user.aggregate.orm.repository'
+
+    user.aggregate.show_aggregate_data.rest_controller:
+        public: true
+        class: User\Aggregate\UserInterface\Rest\ShowAggregateDada
+        arguments:
+            - '@shared.query.bus'
+
+    user.aggregate.aggregate_data_finder.handler:
+        class: User\Aggregate\Application\Action\Query\AggregateDataFinder
+        tags:
+            name: messenger.message_handler
+            handles: User\Group\Application\Model\Query\GroupData
+        arguments:
+            - '@user.aggregate.orm.repository'
+
+    user.aggregate.aggregate_entity_finder.handler:
+        class: User\Aggregate\Application\Action\Query\AggregateEntityFinder
+        tags:
+            name: messenger.message_handler
+            handles: User\Aggregate\Application\Model\Query\AggregateEntity
+        arguments:
+            - '@user.aggregate.orm.repository'
+
+    user.aggregate.update_aggregate.rest_controller:
+        public: true
+        class: User\Aggregate\UserInterface\Rest\UpdateAggregate
+        arguments:
+            - '@shared.command.bus'
+
+    user.aggregate.aggregate_updater.handler:
+        class: User\Aggregate\Application\Action\Command\AggregateUpdater
+        tags:
+            name: messenger.message_handler
+            handles: User\Group\Application\Model\Command\GroupNewData
+        arguments:
+            - '@shared.query.bus'
+            - '@shared.persistence.repository'
+
+    user.aggregate.orm.repository:
+        class: User\Aggregate\Infrastructure\Repository\AggregateRepository
+        arguments:
+            - '@doctrine.orm.entity_manager'

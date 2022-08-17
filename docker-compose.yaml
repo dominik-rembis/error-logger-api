@@ -17,11 +17,11 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: error-logger
+      MYSQL_DATABASE: error_logger
     ports:
       - '3306'
     volumes:
-      - error-logger-api-database-init:/docker-entrypoint-initdb.d/init.sql
+      - ./docker/dev/init.sql:/docker-entrypoint-initdb.d/init.sql
       - error-logger-api-database-data:/var/lib/mysql
   phpmyadmin:
     depends_on:
@@ -34,9 +34,6 @@ services:
       - PMA_HOST=database
       - MYSQL_ROOT_PASSWORD=password
 volumes:
-  error-logger-api-database-init:
-    name: error-logger-api-database-init
-    driver: local
   error-logger-api-database-data:
     name: error-logger-api-database-data
     driver: local

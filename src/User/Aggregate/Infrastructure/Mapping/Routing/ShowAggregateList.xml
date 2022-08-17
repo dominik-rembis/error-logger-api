@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes xmlns="http://symfony.com/schema/routing">
+    <route
+        id="show_aggregate_list"
+        path="/user/aggregate"
+        methods="GET"
+        controller="user.aggregate.show_aggregate_list.rest_controller"
+    />
+</routes>
