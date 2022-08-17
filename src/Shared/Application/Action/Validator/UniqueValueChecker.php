@@ -26,7 +26,7 @@ final class UniqueValueChecker extends AbstractConstraintValidator
             $this->constraint->getColumnName(),
             $value,
             $this->constraint->getExcludeByColumn(),
-            $this->getCallbackValue()
+            $this->getCallbackValue($this->constraint)
         );
 
         if ($result) {
@@ -37,9 +37,9 @@ final class UniqueValueChecker extends AbstractConstraintValidator
         }
     }
 
-    private function getCallbackValue(): mixed
+    private function getCallbackValue(UniqueValue $uniqueValue): mixed
     {
-        $callback = $this->constraint->getExcludedValueCallback();
+        $callback = $uniqueValue->getExcludedValueCallback();
 
         return $callback ? call_user_func([$this->context->getObject(), $callback]) : null;
     }

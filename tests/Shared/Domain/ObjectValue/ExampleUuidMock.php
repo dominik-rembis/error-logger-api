@@ -10,6 +10,6 @@ final class ExampleUuidMock extends AbstractUuid
 {
     public function __construct(string $uuid)
     {
-        parent::__construct($uuid);
+        $this->uid = $uuid;
     }
 }

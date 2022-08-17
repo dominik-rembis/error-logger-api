@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class RequestParamConverter implements ParamConverterInterface
 {
-    public function apply(Request $request, ParamConverter $configuration): void
+    public function apply(Request $request, ParamConverter $configuration): bool
     {
         $parametersFromRequest = [
             ...$request->get('_route_params') ?? [],
@@ -23,6 +23,8 @@ final class RequestParamConverter implements ParamConverterInterface
         $modelInstance = new $modelClass(...$parametersFromRequest);
 
         $request->attributes->set($configuration->getName(), $modelInstance);
+
+        return true;
     }
 
     public function supports(ParamConverter $configuration): bool

@@ -26,6 +26,7 @@ final class ValidationFailedStrategy implements ExceptionStrategyInterface
     private function prepareViolations(): array
     {
         $result = [];
+        /** @phpstan-ignore-next-line */
         foreach ($this->throwable->getViolations() as $violation) {
             $result[$violation->getPropertyPath()] = $violation->getMessage();
         }

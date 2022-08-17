@@ -9,10 +9,7 @@ use Symfony\Component\Uid\Uuid;
 
 abstract class AbstractUuid extends AbstractUid
 {
-    protected function __construct(string $uuid)
-    {
-        $this->uid = $uuid;
-    }
+    abstract protected function __construct(string $uuid);
 
     public static function generate(): static
     {

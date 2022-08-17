@@ -10,6 +10,6 @@ final class AccountUuid extends AbstractUuid
 {
     public function __construct(string $uuid)
     {
-        parent::__construct($uuid);
+        $this->uid = $uuid;
     }
 }

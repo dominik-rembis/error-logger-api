@@ -9,7 +9,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 abstract class AbstractConstraintValidator extends ConstraintValidator
 {
-    protected readonly Constraint $constraint;
+    protected Constraint $constraint;
 
     abstract public function verify(mixed $value): void;
 
