@@ -8,5 +8,8 @@ use PHPUnit\Framework\TestCase;
 
 abstract class BaseTestCase extends TestCase
 {
-
+    public static function propertyReader(string $property, object $object): mixed
+    {
+        return (new \ReflectionClass($object))->getProperty($property)->getValue($object);
+    }
 }

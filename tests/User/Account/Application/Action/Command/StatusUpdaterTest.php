@@ -7,16 +7,14 @@ namespace User\Account\Application\Action\Command;
 use Shared\Application\Action\Query\QueryBusInterface;
 use Shared\Domain\Repository\PersistenceInterface;
 use Shared\Infrastructure\Proxy\Test\BaseTestCase;
-use User\Account\Application\Model\Command\NewAccountData;
+use User\Account\Application\Model\Command\AccountStatus;
 use User\Account\Domain\Entity\Account;
 use User\Account\Domain\ObjectValue\AccountUuid;
 
-final class AccountUpdaterTest extends BaseTestCase
+final class StatusUpdaterTest extends BaseTestCase
 {
     private const EXAMPLE_UUID = '6dca9476-1dd2-49ff-8fc3-4cbeed1e02bb';
-    private const EXAMPLE_NAME = 'exampleName';
-    private const EXAMPLE_SURNAME= 'exampleSurname';
-    private const EXAMPLE_MAIL= 'example@mail.com';
+    private const EXAMPLE_STATUS = true;
 
     private QueryBusInterface $queryBus;
     private PersistenceInterface $persistence;
@@ -29,23 +27,18 @@ final class AccountUpdaterTest extends BaseTestCase
         $this->persistence = self::createMock(PersistenceInterface::class);
     }
     
-    public function testCaseOfUpdatingAccount(): void
+    public function testCaseOfUpdatingAccountStatus(): void
     {
         $this->queryBus->method('handle')->willReturn(self::getUserDataMock());
 
         $this->persistence->expects($this->once())->method('save')->with(
             self::callback(function (Account $object): bool {
-                self::assertEquals(self::EXAMPLE_NAME, self::propertyReader('name', $object));
-                self::assertEquals(self::EXAMPLE_SURNAME, self::propertyReader('surname', $object));
-                self::assertEquals(self::EXAMPLE_MAIL, self::propertyReader('email', $object));
-                self::assertEquals('password', self::propertyReader('password', $object));
-
-                return true;
+                return self::propertyReader('isActive', $object);
             })
         );
 
-        $handler = new AccountUpdater($this->queryBus, $this->persistence);
-        $handler->__invoke(self::getAccountDataMock());
+        $handler = new StatusUpdater($this->queryBus, $this->persistence);
+        $handler->__invoke(self::getAccountStatusMock());
     }
 
     private static function getUserDataMock(): Account
@@ -55,18 +48,13 @@ final class AccountUpdaterTest extends BaseTestCase
             'name',
             'surname',
             'mail',
-            'password'
+            'password',
+            false
         );
     }
 
-    private static function getAccountDataMock(): NewAccountData
+    private static function getAccountStatusMock(): AccountStatus
     {
-        return new NewAccountData(
-            self::EXAMPLE_UUID,
-            self::EXAMPLE_NAME,
-            self::EXAMPLE_SURNAME,
-            self::EXAMPLE_MAIL,
-        );
+        return new AccountStatus(self::EXAMPLE_UUID, self::EXAMPLE_STATUS);
     }
-
 }
