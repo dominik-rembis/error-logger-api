@@ -1,0 +1,10 @@
+parameters:
+    level: 8
+    paths:
+        - src
+    symfony:
+        containerXmlPath: var/cache/dev/Shared_Infrastructure_SymfonyKernelDevDebugContainer.xml
+    doctrine:
+        objectManagerLoader: tests/object-manager.php
+    ignoreErrors:
+        - '#Method Shared\\Infrastructure\\SymfonyKernel::configureContainer\(\) is unused#'
