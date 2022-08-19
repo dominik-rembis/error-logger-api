@@ -32,5 +32,14 @@
                 <option name="excludedValueCallback">getUuid</option>
             </constraint>
         </property>
+        <property name="role">
+            <constraint name="NotBlank"/>
+            <constraint name="Choice">
+                <option name="callback">
+                    <value>User\Account\Domain\ObjectValue\Role</value>
+                    <value>values</value>
+                </option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>

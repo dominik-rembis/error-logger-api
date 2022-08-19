@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace User\Account\Domain\Entity;
 
 use User\Account\Domain\ObjectValue\AccountUuid;
+use User\Account\Domain\ObjectValue\Role;
 use User\Account\Infrastructure\Bridge\Security;
 
 class Account extends Security
@@ -15,7 +16,7 @@ class Account extends Security
         protected string $surname,
         protected string $email,
         protected string $password,
-        protected array $roles,
+        protected Role $role,
         protected bool $isActive = true
     ) {}
 }

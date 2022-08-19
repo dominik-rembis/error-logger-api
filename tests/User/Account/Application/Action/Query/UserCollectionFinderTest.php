@@ -7,6 +7,7 @@ namespace User\Account\Application\Action\Query;
 use Shared\Infrastructure\Proxy\Test\BaseTestCase;
 use User\Account\Domain\Entity\Account;
 use User\Account\Domain\ObjectValue\AccountUuid;
+use User\Account\Domain\ObjectValue\Role;
 use User\Account\Domain\Repository\AccountRepositoryInterface;
 use User\Shared\Application\Model\Query\AccountEntityCollection;
 use User\Shared\Domain\Collection\AccountCollection;
@@ -28,7 +29,7 @@ final class UserCollectionFinderTest extends BaseTestCase
     public function testCaseOfCorrectFindRecordsInDatabase(): void
     {
         $this->repository->method(self::REPOSITORY_METHOD)->willReturn([
-            new Account(AccountUuid::generate(), 'anme', 'surname', 'email', 'password', [])
+            new Account(AccountUuid::generate(), 'anme', 'surname', 'email', 'password', Role::DEVELOPER)
         ]);
 
         $result = $this->executeHandler();

@@ -9,6 +9,7 @@ use Shared\Infrastructure\Proxy\Test\BaseTestCase;
 use User\Account\Application\Model\Query\AccountEntity;
 use User\Account\Domain\Entity\Account;
 use User\Account\Domain\ObjectValue\AccountUuid;
+use User\Account\Domain\ObjectValue\Role;
 use User\Account\Domain\Repository\AccountRepositoryInterface;
 
 final class UserFinderTest extends BaseTestCase
@@ -28,7 +29,7 @@ final class UserFinderTest extends BaseTestCase
     public function testCaseOfCorrectFindRecordsInDatabase(): void
     {
         $this->repository->method(self::REPOSITORY_METHOD)->willReturn(
-            new Account(AccountUuid::generate(), 'anme', 'surname', 'email', 'password', [])
+            new Account(AccountUuid::generate(), 'anme', 'surname', 'email', 'password', Role::DEVELOPER)
         );
 
         $result = $this->executeHandler();

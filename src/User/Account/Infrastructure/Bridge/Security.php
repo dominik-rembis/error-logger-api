@@ -11,7 +11,7 @@ use User\Account\Domain\ObjectValue\Role;
 
 /**
  * @property string $email
- * @property array $roles
+ * @property Role $role
  * @property string $password
  */
 abstract class Security extends AggregateRoot implements UserInterface, PasswordAuthenticatedUserInterface
@@ -23,7 +23,7 @@ abstract class Security extends AggregateRoot implements UserInterface, Password
 
     public function getRoles(): array
     {
-        return array_unique($this->roles ?? [Role::DEVELOPER]);
+        return [$this->role->value];
     }
 
     public function getPassword(): ?string

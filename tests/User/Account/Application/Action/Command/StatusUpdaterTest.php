@@ -50,7 +50,7 @@ final class StatusUpdaterTest extends BaseTestCase
             'surname',
             'mail',
             'password',
-            [Role::DEVELOPER],
+            Role::DEVELOPER,
             false
         );
     }

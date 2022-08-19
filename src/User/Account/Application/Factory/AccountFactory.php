@@ -19,7 +19,7 @@ final class AccountFactory
             $accountData->getSurname(),
             $accountData->getEmail(),
             $password,
-            [Role::DEVELOPER]
+            $accountData->getRole()
         );
     }
 }

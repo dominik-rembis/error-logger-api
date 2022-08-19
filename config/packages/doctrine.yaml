@@ -3,7 +3,7 @@ doctrine:
         url: '%env(resolve:DATABASE_URL)%'
         types:
             account_uuid: User\Account\Infrastructure\Util\Orm\Type\AccountUuidType
-            json_role: User\Account\Infrastructure\Util\Orm\Type\RoleType
+            role: User\Account\Infrastructure\Util\Orm\Type\RoleType
             aggregate_uuid: User\Aggregate\Infrastructure\Util\Orm\Type\AggregateUuidType
 
     orm:

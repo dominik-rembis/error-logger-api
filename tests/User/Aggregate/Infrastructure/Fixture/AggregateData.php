@@ -29,7 +29,7 @@ final class AggregateData extends AbstractFixture
                         $context['accountSurname'] ?? 'exampleSurname',
                         $context['accountEmail'] ?? 'example@mail.com',
                         'exampleHash',
-                        $context['accountRoles'] ?? [Role::DEVELOPER],
+                        $context['accountRoles'] ?? Role::DEVELOPER,
                         $context['accountIsActive'] ?? true
                     )
                 ])

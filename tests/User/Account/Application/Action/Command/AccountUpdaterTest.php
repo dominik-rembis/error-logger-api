@@ -57,7 +57,7 @@ final class AccountUpdaterTest extends BaseTestCase
             'surname',
             'mail',
             'password',
-            [Role::DEVELOPER]
+            Role::DEVELOPER
         );
     }
 

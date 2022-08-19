@@ -13,6 +13,8 @@ final class SuccessAuthentication implements AuthenticationSuccessHandlerInterfa
 {
     public function onAuthenticationSuccess(Request $request, TokenInterface $token): JsonResponse
     {
-        return new JsonResponse();
+        return new JsonResponse([
+            'role' => current($token->getRoleNames())
+        ]);
     }
 }

@@ -6,6 +6,7 @@ namespace User\Account\Application\Model\Command;
 
 use Shared\Application\Model\Command\CommandInterface;
 use User\Account\Domain\ObjectValue\AccountUuid;
+use User\Account\Domain\ObjectValue\Role;
 
 final class NewAccountData implements CommandInterface
 {
@@ -13,7 +14,8 @@ final class NewAccountData implements CommandInterface
         private readonly string $uuid,
         private readonly string $name,
         private readonly string $surname,
-        private readonly string $email,
+        private readonly ?string $email = null,
+        private readonly ?string $role = null
     ) {}
 
     public function getUuid(): AccountUuid
@@ -23,11 +25,12 @@ final class NewAccountData implements CommandInterface
 
     public function toArray(): array
     {
-        return [
+        return array_filter([
             'name' => $this->name,
             'surname' => $this->surname,
             'email' => $this->email,
-        ];
+            'role' => Role::tryFrom($this->role ?? '')
+        ]);
     }
 
     public function getLog(): string

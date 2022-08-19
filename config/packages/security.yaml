@@ -24,6 +24,8 @@ security:
     role_hierarchy:
         ROLE_MANAGER: ROLE_DEVELOPER
         ROLE_ADMINISTRATOR: ROLE_MANAGER
+#    access_control:
+#        - { path: ^/user/account, roles: ROLE_ADMINISTRATOR }
 
 when@test:
     security:
