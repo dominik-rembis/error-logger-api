@@ -4,6 +4,12 @@ services:
         autoconfigure: false
         public: false
 
+    shared.security.success_authentication:
+        class: Shared\Infrastructure\Adapter\Security\SuccessAuthentication
+
+    shared.security.failure_authentication:
+        class: Shared\Infrastructure\Adapter\Security\FailureAuthentication
+
     shared.request.param_converter:
         class: Shared\Infrastructure\Adapter\ParamConverter\RequestParamConverter
         tags:
@@ -39,3 +45,8 @@ services:
         class: Shared\Infrastructure\EventListener\KernelException
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
+
+    shared.event.logout.listener:
+        class: Shared\Infrastructure\EventListener\Logout
+        tags:
+            - { name: kernel.event_listener, event: Symfony\Component\Security\Http\Event\LogoutEvent, method: onLogout }

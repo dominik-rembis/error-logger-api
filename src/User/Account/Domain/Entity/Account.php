@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace User\Account\Domain\Entity;
 
-use Shared\Domain\Entity\AggregateRoot;
 use User\Account\Domain\ObjectValue\AccountUuid;
+use User\Account\Infrastructure\Bridge\Security;
 
-final class Account extends AggregateRoot
+class Account extends Security
 {
     public function __construct(
-        private AccountUuid $uuid,
-        private string $name,
-        private string $surname,
-        private string $email,
-        private string $password,
-        private bool $isActive = true
+        protected AccountUuid $uuid,
+        protected string $name,
+        protected string $surname,
+        protected string $email,
+        protected string $password,
+        protected array $roles,
+        protected bool $isActive = true
     ) {}
 }

@@ -10,6 +10,7 @@ use Shared\Infrastructure\Proxy\Test\BaseTestCase;
 use User\Account\Application\Model\Command\NewAccountData;
 use User\Account\Domain\Entity\Account;
 use User\Account\Domain\ObjectValue\AccountUuid;
+use User\Account\Domain\ObjectValue\Role;
 
 final class AccountUpdaterTest extends BaseTestCase
 {
@@ -55,7 +56,8 @@ final class AccountUpdaterTest extends BaseTestCase
             'name',
             'surname',
             'mail',
-            'password'
+            'password',
+            [Role::DEVELOPER]
         );
     }
 

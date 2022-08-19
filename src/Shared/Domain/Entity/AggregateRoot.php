@@ -16,7 +16,7 @@ abstract class AggregateRoot
             foreach ($values as $property => $value) {
                 $reflectionClass->getProperty($property)->setValue($this, $value);
             }
-        } catch (\Throwable $throwable) {
+        } catch (\Throwable) {
             throw new InvalidProperty($property);
         }
 

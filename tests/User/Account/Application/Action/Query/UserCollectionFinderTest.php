@@ -28,7 +28,7 @@ final class UserCollectionFinderTest extends BaseTestCase
     public function testCaseOfCorrectFindRecordsInDatabase(): void
     {
         $this->repository->method(self::REPOSITORY_METHOD)->willReturn([
-            new Account(AccountUuid::generate(), 'anme', 'surname', 'email', 'password')
+            new Account(AccountUuid::generate(), 'anme', 'surname', 'email', 'password', [])
         ]);
 
         $result = $this->executeHandler();

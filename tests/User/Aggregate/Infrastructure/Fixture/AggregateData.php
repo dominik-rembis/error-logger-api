@@ -7,6 +7,7 @@ namespace User\Aggregate\Infrastructure\Fixture;
 use Shared\Infrastructure\Adapter\Fixture\AbstractFixture;
 use User\Account\Domain\Entity\Account;
 use User\Account\Domain\ObjectValue\AccountUuid;
+use User\Account\Domain\ObjectValue\Role;
 use User\Aggregate\Domain\Entity\Aggregate;
 use User\Aggregate\Domain\ObjectValue\AggregateUuid;
 use User\Shared\Domain\Collection\AccountCollection;
@@ -28,6 +29,7 @@ final class AggregateData extends AbstractFixture
                         $context['accountSurname'] ?? 'exampleSurname',
                         $context['accountEmail'] ?? 'example@mail.com',
                         'exampleHash',
+                        $context['accountRoles'] ?? [Role::DEVELOPER],
                         $context['accountIsActive'] ?? true
                     )
                 ])

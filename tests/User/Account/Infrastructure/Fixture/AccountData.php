@@ -5,6 +5,7 @@ namespace User\Account\Infrastructure\Fixture;
 use Shared\Infrastructure\Adapter\Fixture\AbstractFixture;
 use User\Account\Domain\Entity\Account;
 use User\Account\Domain\ObjectValue\AccountUuid;
+use User\Account\Domain\ObjectValue\Role;
 
 class AccountData extends AbstractFixture
 {
@@ -17,6 +18,7 @@ class AccountData extends AbstractFixture
                 $context['surname'] ?? 'exampleSurname',
                 $context['email'] ??'example@mail.com',
                 $context['password'] ?? 'exampleHash',
+                $context['roles'] ?? [Role::DEVELOPER],
                 $context['isActive'] ?? true
             )
         );

@@ -7,6 +7,7 @@ namespace User\Account\Application\Factory;
 use User\Account\Application\Model\Command\AccountData;
 use User\Account\Domain\Entity\Account;
 use User\Account\Domain\ObjectValue\AccountUuid;
+use User\Account\Domain\ObjectValue\Role;
 
 final class AccountFactory
 {
@@ -17,7 +18,8 @@ final class AccountFactory
             $accountData->getName(),
             $accountData->getSurname(),
             $accountData->getEmail(),
-            $password
+            $password,
+            [Role::DEVELOPER]
         );
     }
 }
