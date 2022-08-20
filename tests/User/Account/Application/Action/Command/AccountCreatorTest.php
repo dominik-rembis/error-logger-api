@@ -37,6 +37,7 @@ final class AccountCreatorTest extends BaseTestCase
             'exampleName',
             'examplesurname',
             'example@mail.com',
+            'ROLE_DEVELOPER'
         );
     }
 

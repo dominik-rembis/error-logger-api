@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Shared\Infrastructure\EventListener;
+namespace Shared\Infrastructure\EventListener\Security;
 
 use Shared\Infrastructure\Proxy\Response\JsonResponse;
 use Symfony\Component\Security\Http\Event\LogoutEvent;

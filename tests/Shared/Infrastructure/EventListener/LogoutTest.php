@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Shared\Infrastructure\EventListener;
 
+use Shared\Infrastructure\EventListener\Security\Logout;
 use Shared\Infrastructure\Proxy\Response\JsonResponse;
 use Shared\Infrastructure\Proxy\Test\BaseTestCase;
 use Symfony\Component\Security\Http\Event\LogoutEvent;

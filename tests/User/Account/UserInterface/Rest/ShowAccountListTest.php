@@ -24,21 +24,11 @@ final class ShowAccountListTest extends BaseWebTestCase
         $this->client = self::createClient();
     }
 
-    public function testCaseOfNotFindingUsers(): void
-    {
-        $this->client->request(self::GET, self::ENDPOINT_PATH);
-
-        $this->assertResponseStatusCodeSame(self::OK);
-        $this->assertResponseJsonContent(
-            '{"status":200,"data":[]}',
-            $this->client
-        );
-    }
-
     public function testCaseOfFindingAccountList(): void
     {
         $this->loadFixtures([AccountData::class => ['uuid' => self::BASE_UUID]]);
 
+        $this->loginUser(['uuid' => self::BASE_UUID], $this->client);
         $this->client->request(self::GET, self::ENDPOINT_PATH);
 
         $this->assertResponseStatusCodeSame(self::OK);
@@ -57,6 +47,7 @@ final class ShowAccountListTest extends BaseWebTestCase
             'isActive' => false
         ]]);
 
+        $this->loginUser(['uuid' => self::BASE_UUID], $this->client);
         $this->client->request(self::GET, self::ENDPOINT_PATH);
 
         $this->assertResponseStatusCodeSame(self::OK);
@@ -64,5 +55,12 @@ final class ShowAccountListTest extends BaseWebTestCase
             '{"status":200,"data":[{"uuid":"258b114e-bfc2-44b1-bfc5-3964bcbde094","name":"exampleName","surname":"exampleSurname","status":false,"email":null},{"uuid":"6dca9476-1dd2-49ff-8fc3-4cbeed1e02ba","name":"exampleName","surname":"exampleSurname","status":true,"email":null}]}',
             $this->client
         );
+    }
+
+    public function testCaseForNoAuthentication(): void
+    {
+        $this->client->request(self::GET, self::ENDPOINT_PATH);
+
+        $this->assertResponseStatusCodeSame(self::UNAUTHORIZED);
     }
 }

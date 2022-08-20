@@ -6,6 +6,7 @@ namespace Shared\Infrastructure\Proxy\Test;
 
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use User\Account\Domain\Entity\Account;
 
 abstract class BaseWebTestCase extends WebTestCase
 {
@@ -15,12 +16,13 @@ abstract class BaseWebTestCase extends WebTestCase
 
     protected const OK = 200;
     protected const CREATED = 201;
+    protected const UNAUTHORIZED = 401;
     protected const NOT_FOUND = 404;
     protected const UNPROCESSABLE_ENTITY = 422;
 
     protected const JSON = 'json';
 
-    protected static function assertResponseJsonContent(
+    public static function assertResponseJsonContent(
         ?string $expected,
         KernelBrowser $client,
         string $message = ''
@@ -34,7 +36,7 @@ abstract class BaseWebTestCase extends WebTestCase
         );
     }
 
-    protected function assertInDatabase(
+    public function assertInDatabase(
         string $entity,
         array $criteria,
         string $message = 'No records were found with the specified criteria'
@@ -43,7 +45,7 @@ abstract class BaseWebTestCase extends WebTestCase
         $this->assertTrue($this->databaseFinder($entity, $criteria), $message);
     }
 
-    protected function assertNotInDatabase(
+    public function assertNotInDatabase(
         string $entity,
         array $criteria,
         string $message = 'Records were found with the specified criteria'
@@ -52,7 +54,7 @@ abstract class BaseWebTestCase extends WebTestCase
         $this->assertFalse($this->databaseFinder($entity, $criteria), $message);
     }
 
-    protected function loadFixtures(array $fixtures): void
+    public function loadFixtures(array $fixtures): void
     {
         $entityManager = (self::$kernel ?? self::bootKernel())
             ->getContainer()->get('doctrine.orm.entity_manager');
@@ -60,6 +62,16 @@ abstract class BaseWebTestCase extends WebTestCase
         foreach ($fixtures as $class => $context) {
             (new $class($context))->load($entityManager);
         }
+    }
+
+    public function loginUser(array $criteria, KernelBrowser $client): void
+    {
+        $entityManager = (self::$kernel ?? self::bootKernel())
+            ->getContainer()->get('doctrine.orm.entity_manager');
+
+        $client->loginUser(
+            $entityManager->getRepository(Account::class)->findOneBy($criteria)
+        );
     }
 
     private function databaseFinder(string $entity, array $criteria): bool

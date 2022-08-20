@@ -10,6 +10,7 @@ enum Role: string
     case MANAGER = 'ROLE_MANAGER';
     case DEVELOPER = 'ROLE_DEVELOPER';
 
+    /** @return string[] */
     public static function values(): array
     {
         return array_map(fn(Role $case): string => $case->value, self::cases());

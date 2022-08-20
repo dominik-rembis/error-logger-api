@@ -2,10 +2,6 @@ security_login:
     path: /login
     methods: POST
 
-security_logout:
-    path: /logout
-    methods: POST
-
 user_account:
     resource: ../src/User/Account/Infrastructure/Mapping/Routing/
     type: directory

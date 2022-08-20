@@ -32,9 +32,11 @@ final class UpdateAccountTest extends BaseWebTestCase
         $this->client->jsonRequest(self::PUT, $url, $body = [
             'name' => 'exampleName',
             'surname' => 'exampleSurname',
-            'email' => 'example@mail.com'
+            'email' => 'example@mail.com',
+            'role' => 'ROLE_DEVELOPER'
         ]);
 
+        unset($body['role']);
         $this->assertResponseStatusCodeSame(self::OK);
         $this->assertResponseJsonContent('{"status":200,"message":null}', $this->client);
         $this->assertInDatabase(Account::class, $body);
@@ -49,9 +51,11 @@ final class UpdateAccountTest extends BaseWebTestCase
         $this->client->jsonRequest(self::PUT, $url, $body = [
             'name' => 'exampleName',
             'surname' => 'exampleSurname',
-            'email' => 'example2@mail.com'
+            'email' => 'example2@mail.com',
+            'role' => 'ROLE_DEVELOPER'
         ]);
 
+        unset($body['role']);
         $this->assertInDatabase(Account::class, $body);
 
         $this->assertResponseStatusCodeSame(self::OK);
@@ -76,7 +80,8 @@ final class UpdateAccountTest extends BaseWebTestCase
         $this->client->jsonRequest(self::PUT, $url, [
             'name' => 'exampleName',
             'surname' => 'exampleSurname',
-            'email' => 'example2@mail.com'
+            'email' => 'example2@mail.com',
+            'role' => 'ROLE_DEVELOPER'
         ]);
 
         $this->assertResponseStatusCodeSame(self::UNPROCESSABLE_ENTITY);
