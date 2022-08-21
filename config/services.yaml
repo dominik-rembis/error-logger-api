@@ -40,17 +40,27 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
 
-    shared.event.success_login.listener:
-        class: Shared\Infrastructure\EventListener\Security\SuccessLogin
+    shared.event.success_authentication.listener:
+        class: Shared\Infrastructure\EventListener\Security\SuccessAuthentication
         tags:
-            - { name: kernel.event_listener, event: Symfony\Component\Security\Http\Event\LoginSuccessEvent, method: onSuccess }
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onSuccess }
 
-    shared.event.failure_login.listener:
-        class: Shared\Infrastructure\EventListener\Security\FailureLogin
+    shared.event.failure_authentication.listener:
+        class: Shared\Infrastructure\EventListener\Security\FailureAuthentication
         tags:
-            - { name: kernel.event_listener, event: Symfony\Component\Security\Http\Event\LoginFailureEvent, method: onFailure }
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_failure, method: onFailure }
 
-    shared.event.logout.listener:
-        class: Shared\Infrastructure\EventListener\Security\Logout
+    shared.event.token_invalid.listener:
+        class: Shared\Infrastructure\EventListener\Security\TokenInvalid
         tags:
-            - { name: kernel.event_listener, event: Symfony\Component\Security\Http\Event\LogoutEvent, method: onLogout }
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_invalid, method: onInvalid }
+
+    shared.event.token_not_found.listener:
+        class: Shared\Infrastructure\EventListener\Security\TokenNotFound
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_not_found, method: onNotFound }
+
+    shared.event.token_expired.listener:
+        class: Shared\Infrastructure\EventListener\Security\TokenExpired
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_expired, method: onExpired }

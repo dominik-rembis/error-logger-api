@@ -17,6 +17,7 @@ security:
                 check_path: /login
                 username_path: email
                 success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
         api:
             pattern: ^/
             stateless: true
