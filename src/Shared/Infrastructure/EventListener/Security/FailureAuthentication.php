@@ -13,7 +13,7 @@ final class FailureAuthentication
     {
         $event->setResponse(
             new JsonResponse(
-                $event->getException()->getMessage(),
+                'Invalid credentials.',
                 $event->getResponse()->getStatusCode()
             )
         );

@@ -61,21 +61,6 @@ services:
             - '@shared.query.bus'
             - '@shared.persistence.repository'
 
-    user.account.change_account_status.rest_controller:
-        public: true
-        class: User\Account\UserInterface\Rest\ChangeAccountStatus
-        arguments:
-            - '@shared.command.bus'
-
-    user.account.account_status_updater.handler:
-        class: User\Account\Application\Action\Command\StatusUpdater
-        tags:
-            name: messenger.message_handler
-            handles: User\Account\Application\Model\Command\AccountStatus
-        arguments:
-            - '@shared.query.bus'
-            - '@shared.persistence.repository'
-
     user.account.user_finder.handler:
         class: User\Account\Application\Action\Query\AccountEntityFinder
         tags:

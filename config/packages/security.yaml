@@ -26,8 +26,9 @@ security:
         ROLE_MANAGER: ROLE_DEVELOPER
         ROLE_ADMINISTRATOR: ROLE_MANAGER
     access_control:
-        - { path: ^/user/account, methods: POST, roles: ROLE_ADMINISTRATOR }
-        - { path: ^/user/account, methods: GET, roles: ROLE_DEVELOPER }
+        - { path: ^\/user\/account$, methods: POST, roles: ROLE_ADMINISTRATOR }
+        - { path: ^(\/user)(\/.+)?(\/account)$, methods: [GET, PUT], roles: ROLE_DEVELOPER }
+        - { path: ^(\/user\/aggregate)(\/.+)?$, methods: [GET, POST, PUT], roles: ROLE_MANAGER }
 
 when@test:
     security:

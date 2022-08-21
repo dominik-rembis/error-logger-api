@@ -29,6 +29,7 @@ final class UpdateAccountTest extends BaseWebTestCase
 
         $this->loadFixtures([AccountData::class => ['uuid' => self::BASE_UUID]]);
 
+        $this->loginUser(['uuid' => self::BASE_UUID], $this->client);
         $this->client->jsonRequest(self::PUT, $url, $body = [
             'name' => 'exampleName',
             'surname' => 'exampleSurname',
@@ -48,6 +49,7 @@ final class UpdateAccountTest extends BaseWebTestCase
 
         $this->loadFixtures([AccountData::class => ['uuid' => self::BASE_UUID]]);
 
+        $this->loginUser(['uuid' => self::BASE_UUID], $this->client);
         $this->client->jsonRequest(self::PUT, $url, $body = [
             'name' => 'exampleName',
             'surname' => 'exampleSurname',
@@ -77,6 +79,7 @@ final class UpdateAccountTest extends BaseWebTestCase
             'email' => 'example2@mail.com'
         ]]);
 
+        $this->loginUser(['uuid' => self::BASE_UUID], $this->client);
         $this->client->jsonRequest(self::PUT, $url, [
             'name' => 'exampleName',
             'surname' => 'exampleSurname',

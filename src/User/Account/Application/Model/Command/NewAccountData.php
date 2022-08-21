@@ -15,7 +15,8 @@ final class NewAccountData implements CommandInterface
         private readonly string $name,
         private readonly string $surname,
         private readonly ?string $email = null,
-        private readonly ?string $role = null
+        private readonly ?string $role = null,
+        private readonly ?bool $isActive = null
     ) {}
 
     public function getUuid(): AccountUuid
@@ -29,7 +30,8 @@ final class NewAccountData implements CommandInterface
             'name' => $this->name,
             'surname' => $this->surname,
             'email' => $this->email,
-            'role' => Role::tryFrom($this->role ?? '')
+            'role' => Role::tryFrom($this->role ?? ''),
+            'isActive' => $this->isActive
         ]);
     }
 

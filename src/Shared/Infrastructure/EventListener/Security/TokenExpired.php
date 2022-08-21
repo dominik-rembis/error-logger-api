@@ -13,7 +13,7 @@ final class TokenExpired
     {
         $event->setResponse(
             new JsonResponse(
-                $event->getException()->getMessage(),
+                'Expired JWT Token.',
                 $event->getResponse()->getStatusCode()
             )
         );

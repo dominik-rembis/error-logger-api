@@ -6,6 +6,7 @@ namespace User\Aggregate\UserInterface\Rest;
 
 use Shared\Infrastructure\Proxy\Test\BaseWebTestCase;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
+use User\Account\Domain\ObjectValue\Role;
 use User\Account\Infrastructure\Fixture\AccountData;
 use User\Aggregate\Domain\Entity\Aggregate;
 use User\Aggregate\Infrastructure\Fixture\AggregateData;
@@ -29,7 +30,7 @@ final class UpdateGroupTest extends BaseWebTestCase
 
     public function testCaseOfCorrectAggregateNameChange(): void
     {
-        $this->loadFixtures([AggregateData::class => ['aggregateUuid' => self::BASE_UUID]]);
+        $this->loadFixtureAndAuthorize();
 
         $this->client->jsonRequest(self::PUT, self::ENDPOINT_PATH, $body = [
             'name' => 'exampleName2'
@@ -42,7 +43,7 @@ final class UpdateGroupTest extends BaseWebTestCase
 
     public function testCaseOfChangingAggregateNameToExistingOne(): void
     {
-        $this->loadFixtures([AggregateData::class => ['aggregateUuid' => self::BASE_UUID]]);
+        $this->loadFixtureAndAuthorize();
         $this->loadFixtures([AggregateData::class => [
             'aggregateUuid' => self::SECOND_UUID,
             'aggregateName' => 'exampleName2',
@@ -66,11 +67,10 @@ final class UpdateGroupTest extends BaseWebTestCase
 
     public function testCaseOfAssigningNewAccountToAggregate(): void
     {
-        $this->loadFixtures([
-            AggregateData::class => ['aggregateUuid' => self::BASE_UUID, 'accountUuid' => self::SECOND_UUID],
-            AccountData::class => ['uuid' => self::THIRD_UUID, 'email' => 'example2@mail.com']
-        ]);
+        $this->loadFixtureAndAuthorize();
+        $this->loadFixtures([AccountData::class => ['uuid' => self::THIRD_UUID, 'email' => 'example2@mail.com']]);
 
+        $this->loginUser(['uuid' => self::SECOND_UUID], $this->client);
         $this->client->jsonRequest(self::PUT, self::ENDPOINT_PATH, [
             'name' => 'example',
             'accountUuids' => [self::SECOND_UUID, self::THIRD_UUID]
@@ -82,9 +82,7 @@ final class UpdateGroupTest extends BaseWebTestCase
 
     public function testCaseOfRemovingUserFromAggregate(): void
     {
-        $this->loadFixtures([
-            AggregateData::class => ['aggregateUuid' => self::BASE_UUID, 'accountUuid' => self::SECOND_UUID]
-        ]);
+        $this->loadFixtureAndAuthorize();
 
         $this->client->jsonRequest(self::PUT, self::ENDPOINT_PATH, [
             'name' => 'example',
@@ -93,5 +91,18 @@ final class UpdateGroupTest extends BaseWebTestCase
 
         $this->assertResponseStatusCodeSame(self::OK);
         $this->assertResponseJsonContent('{"status":200,"message":null}', $this->client);
+    }
+
+    private function loadFixtureAndAuthorize(): void
+    {
+        $this->loadFixtures([
+            AggregateData::class => [
+                'aggregateUuid' => self::BASE_UUID,
+                'accountUuid' => self::SECOND_UUID,
+                'accountRole' => Role::MANAGER
+            ]
+        ]);
+
+        $this->loginUser(['uuid' => self::SECOND_UUID], $this->client);
     }
 }
