@@ -32,7 +32,7 @@ final class NewAccountData implements CommandInterface
             'email' => $this->email,
             'role' => Role::tryFrom($this->role ?? ''),
             'isActive' => $this->isActive
-        ]);
+        ], fn(mixed $value): bool => !is_null($value));
     }
 
     public function getLog(): string

@@ -13,6 +13,7 @@ use User\Account\Domain\ObjectValue\Role;
  * @property string $email
  * @property Role $role
  * @property string $password
+ * @property bool $isActive
  */
 abstract class Security extends AggregateRoot implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -32,12 +33,10 @@ abstract class Security extends AggregateRoot implements UserInterface, Password
     }
 
     public function eraseCredentials(): void
-    {
-        $this->password = '';
-    }
+    {}
 
     public function isActive(): bool
     {
-        return false;
+        return $this->isActive;
     }
 }

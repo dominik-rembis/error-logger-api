@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Shared\Infrastructure\Repository;
 
 use Shared\Domain\Repository\SharedRepositoryInterface;
-use Shared\Infrastructure\Adapter\Uuid\AbstractUuid;
 
 final class SharedRepository extends AbstractRepository implements SharedRepositoryInterface
 {
@@ -39,6 +38,6 @@ final class SharedRepository extends AbstractRepository implements SharedReposit
 
     private static function prepareType(mixed $value): ?string
     {
-        return $value instanceof AbstractUuid ? 'uuid' : null;
+        return uuid_is_valid((string) $value) ? 'uuid' : null;
     }
 }

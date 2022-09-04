@@ -8,6 +8,10 @@ use Shared\Domain\Exception\InvalidProperty;
 
 abstract class AggregateRoot
 {
+    /**
+     * @param array<string, mixed> $values
+     * @throws InvalidProperty
+     */
     public function setProperties(array $values): static
     {
         $reflectionClass = new \ReflectionClass($this);

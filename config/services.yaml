@@ -40,6 +40,13 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
 
+    shared.security.user_provider:
+        class: Shared\Infrastructure\Proxy\Security\UserProvider
+        arguments:
+            - '@doctrine'
+            - User\Account\Domain\Entity\Account
+            - email
+
     shared.event.success_authentication.listener:
         class: Shared\Infrastructure\EventListener\Security\SuccessAuthentication
         tags:

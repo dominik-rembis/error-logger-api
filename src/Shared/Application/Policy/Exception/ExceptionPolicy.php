@@ -11,13 +11,15 @@ use Shared\Domain\Exception\NotFound;
 use Shared\Domain\Strategy\ExceptionStrategyInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Messenger\Exception\ValidationFailedException;
+use Symfony\Component\Security\Core\Exception\InsufficientAuthenticationException;
 
 final class ExceptionPolicy
 {
     public static function create(\Throwable $throwable): ?ExceptionStrategyInterface
     {
         return match (get_class($throwable->getPrevious() ?? $throwable)) {
-            AccessDeniedException::class => new AccessDeniedStrategy($throwable),
+            AccessDeniedException::class,
+            InsufficientAuthenticationException::class => new AccessDeniedStrategy($throwable),
             ValidationFailedException::class => new ValidationFailedStrategy($throwable),
             NotFound::class => new NotFoundStrategy($throwable),
             default => null

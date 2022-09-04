@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class JsonResponse extends Response
 {
+    /** @param array<string, string> $headers */
     public function __construct(
         mixed $data = null,
         int $status = 200,

@@ -6,6 +6,7 @@ namespace Shared\Application\Factory;
 
 final class ResponseContentFactory
 {
+    /** @return array<string, mixed> */
     public static function create(mixed $data, int $status): array
     {
         return [
