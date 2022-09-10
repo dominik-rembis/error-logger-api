@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes xmlns="http://symfony.com/schema/routing">
+    <route
+        id="create_application"
+        path="/project/application"
+        methods="POST"
+        controller="project.application.create_application.rest_controller"
+    />
+</routes>

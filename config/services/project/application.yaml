@@ -1,0 +1,19 @@
+services:
+    _defaults:
+        autowire: false
+        autoconfigure: false
+        public: false
+
+    project.application.create_application.rest_controller:
+        public: true
+        class: Project\Application\UserInterface\Rest\CreateApplication
+        arguments:
+            - '@shared.command.bus'
+
+    project.application.application_creator.handler:
+        class: Project\Application\Application\Action\Command\ApplicationCreator
+        tags:
+            name: messenger.message_handler
+            handles: Project\Application\Application\Model\Command\ApplicationData
+        arguments:
+            - '@shared.persistence.repository'

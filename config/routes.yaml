@@ -9,3 +9,7 @@ user_account:
 user_group:
     resource: ../src/User/Aggregate/Infrastructure/Mapping/Routing/
     type: directory
+
+project_application:
+    resource: ../src/Project/Application/Infrastructure/Mapping/Routing/
+    type: directory

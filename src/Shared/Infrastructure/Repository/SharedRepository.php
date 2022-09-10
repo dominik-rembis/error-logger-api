@@ -22,7 +22,7 @@ final class SharedRepository extends AbstractRepository implements SharedReposit
             ->select('e.uuid')
             ->from($entity, 'e')
             ->where($qb->expr()->eq(sprintf('e.%s', $column), ':value'))
-            ->setParameter('value', $value);
+            ->setParameter('value', $value, self::prepareType($value));
 
         if ($excludeByColumn && $excludedValue) {
             $query
@@ -30,10 +30,9 @@ final class SharedRepository extends AbstractRepository implements SharedReposit
                 ->setParameter('excludedValue', $excludedValue, self::prepareType($excludedValue));
         }
 
-        return (bool) $query
-            ->setMaxResults(1)
-            ->getQuery()
-            ->execute();
+        return (bool) count(
+            $query->getQuery()->getSingleColumnResult()
+        );
     }
 
     private static function prepareType(mixed $value): ?string

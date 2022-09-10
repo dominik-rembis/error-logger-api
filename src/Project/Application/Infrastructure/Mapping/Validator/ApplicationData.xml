@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping">
+    <class name="Project\Application\Application\Model\Command\ApplicationData">
+        <property name="name">
+            <constraint name="NotBlank"/>
+            <constraint name="Length">
+                <option name="max">100</option>
+            </constraint>
+            <constraint name="Shared\Application\Model\Validator\UniqueValue">
+                <option name="entityClass">Project\Application\Domain\Entity\Application</option>
+                <option name="columnName">name</option>
+            </constraint>
+        </property>
+        <property name="aggregateUuid">
+            <constraint name="Uuid"/>
+            <constraint name="Shared\Application\Model\Validator\DatabaseValue">
+                <option name="entityClass">User\Aggregate\Domain\Entity\Aggregate</option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

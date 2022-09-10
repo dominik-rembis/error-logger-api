@@ -7,7 +7,7 @@ use User\Account\Domain\Entity\Account;
 use User\Account\Domain\ObjectValue\AccountUuid;
 use User\Account\Domain\ObjectValue\Role;
 
-class AccountData extends AbstractFixture
+final class AccountData extends AbstractFixture
 {
     public function execute(array $context): void
     {

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping>
+    <entity name="Project\Application\Domain\Entity\Application">
+        <id name="uuid" type="application_uuid"/>
+
+        <field name="name" type="string" length="100" unique="true"/>
+        <field name="aggregateUuid" type="aggregate_identifier"/>
+    </entity>
+</doctrine-mapping>

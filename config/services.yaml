@@ -25,6 +25,12 @@ services:
         arguments:
             - '@shared.orm.repository'
 
+    shared.database_value.validator:
+        class: Shared\Application\Action\Validator\DatabaseValueChecker
+        autoconfigure: true
+        arguments:
+            - '@shared.orm.repository'
+
     shared.command.bus:
         class: Shared\Infrastructure\Proxy\MessageBus\CommandBus
         arguments:

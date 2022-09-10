@@ -7,7 +7,10 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-final class Version20220819074405 extends AbstractMigration
+/**
+ * Auto-generated Migration: Please modify to your needs!
+ */
+final class Version20220910110307 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -16,19 +19,23 @@ final class Version20220819074405 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
+        // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE account (uuid BINARY(16) NOT NULL COMMENT \'(DC2Type:account_uuid)\', name VARCHAR(50) NOT NULL, surname VARCHAR(50) NOT NULL, email VARCHAR(100) NOT NULL, password VARCHAR(96) NOT NULL, role VARCHAR(20) NOT NULL COMMENT \'(DC2Type:role)\', is_active TINYINT(1) DEFAULT 1 NOT NULL, UNIQUE INDEX UNIQ_7D3656A4E7927C74 (email), PRIMARY KEY(uuid)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE aggregate (uuid BINARY(16) NOT NULL COMMENT \'(DC2Type:aggregate_uuid)\', name VARCHAR(50) NOT NULL, UNIQUE INDEX UNIQ_B77949FF5E237E06 (name), PRIMARY KEY(uuid)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE account_aggregate (aggregate_uuid BINARY(16) NOT NULL COMMENT \'(DC2Type:aggregate_uuid)\', account_uuid BINARY(16) NOT NULL COMMENT \'(DC2Type:account_uuid)\', INDEX IDX_950391A450869B26 (aggregate_uuid), INDEX IDX_950391A45DECD70C (account_uuid), PRIMARY KEY(aggregate_uuid, account_uuid)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE application (uuid BINARY(16) NOT NULL COMMENT \'(DC2Type:application_uuid)\', name VARCHAR(100) NOT NULL, aggregate_uuid BINARY(16) NOT NULL COMMENT \'(DC2Type:aggregate_identifier)\', UNIQUE INDEX UNIQ_A45BDDC15E237E06 (name), PRIMARY KEY(uuid)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE account_aggregate ADD CONSTRAINT FK_950391A450869B26 FOREIGN KEY (aggregate_uuid) REFERENCES aggregate (uuid)');
         $this->addSql('ALTER TABLE account_aggregate ADD CONSTRAINT FK_950391A45DECD70C FOREIGN KEY (account_uuid) REFERENCES account (uuid)');
     }
 
     public function down(Schema $schema): void
     {
+        // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE account_aggregate DROP FOREIGN KEY FK_950391A450869B26');
         $this->addSql('ALTER TABLE account_aggregate DROP FOREIGN KEY FK_950391A45DECD70C');
         $this->addSql('DROP TABLE account');
         $this->addSql('DROP TABLE aggregate');
         $this->addSql('DROP TABLE account_aggregate');
+        $this->addSql('DROP TABLE application');
     }
 }

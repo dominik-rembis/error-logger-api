@@ -5,6 +5,8 @@ doctrine:
             account_uuid: User\Account\Infrastructure\Util\Orm\Type\AccountUuidType
             role: User\Account\Infrastructure\Util\Orm\Type\RoleType
             aggregate_uuid: User\Aggregate\Infrastructure\Util\Orm\Type\AggregateUuidType
+            application_uuid: Project\Application\Infrastructure\Util\Orm\Type\ApplicationUuidType
+            aggregate_identifier: Project\Application\Infrastructure\Util\Orm\Type\AggregateUuidType
 
     orm:
         auto_generate_proxy_classes: true
@@ -23,6 +25,12 @@ doctrine:
                 dir: '%kernel.project_dir%/src/User/Aggregate/Infrastructure/Mapping/Orm'
                 prefix: 'User\Aggregate\Domain\Entity'
                 alias: User\Aggregate
+            Project\Application:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Project/Application/Infrastructure/Mapping/Orm'
+                prefix: 'Project\Application\Domain\Entity'
+                alias: Project\Application
 
 when@test:
     doctrine:

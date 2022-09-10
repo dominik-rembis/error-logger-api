@@ -21,6 +21,6 @@ final class SymfonyKernel extends Kernel
     ): void
     {
         $this->baseContainerConfiguration($container, $loader, $builder);
-        $container->import(sprintf('%s/services/*.yaml', $this->getConfigDir()));
+        $container->import(sprintf('%s/services/*/*.yaml', $this->getConfigDir()));
     }
 }
