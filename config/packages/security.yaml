@@ -28,7 +28,8 @@ security:
         - { path: ^(\/user)(\/.+)?(\/account)$, methods: [GET, PUT], roles: ROLE_DEVELOPER }
         - { path: ^(\/user\/aggregate)(\/.+)?$, methods: [GET, POST, PUT], roles: ROLE_MANAGER }
         - { path: ^\/project\/application, methods: POST, roles: ROLE_MANAGER }
-        - { path: ^(\/project\/application)(\/.+)?$, methods: PUT, roles: ROLE_MANAGER }
+        - { path: ^(\/project)(\/.+)(\/application)$, methods: PUT, roles: ROLE_MANAGER }
+        - { path: ^(\/project)(\/.+)?(\/application)$, methods: GET, roles: ROLE_DEVELOPER }
 
 when@test:
     security:

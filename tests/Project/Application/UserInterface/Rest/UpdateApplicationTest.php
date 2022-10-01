@@ -17,7 +17,7 @@ final class UpdateApplicationTest extends BaseWebTestCase
     private const USER_UUID = '5521b951-4e41-4b1f-9415-6c70106f0062';
     private const AGGREGATE_UUID = 'efc43223-2f50-48c3-a1d0-1a2a3d3c6688';
     private const APPLICATION_UUID = '6dca9476-1dd2-49ff-8fc3-4cbeed1e02ba';
-    private const ENDPOINT = '/project/application/' . self::APPLICATION_UUID;
+    private const ENDPOINT = '/project/' . self::APPLICATION_UUID . '/application';
 
     private readonly KernelBrowser $client;
 

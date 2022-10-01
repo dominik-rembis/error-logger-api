@@ -18,6 +18,34 @@ services:
         arguments:
             - '@shared.persistence.repository'
 
+    project.application.application_list.rest_controller:
+        public: true
+        class: Project\Application\UserInterface\Rest\ShowApplicationList
+        arguments:
+            - '@shared.query.bus'
+
+    project.application.application_list_finder.handler:
+        class: Project\Application\Application\Action\Query\ApplicationListFinder
+        tags:
+            name: messenger.message_handler
+            handles: Project\Application\Application\Model\Query\ApplicationList
+        arguments:
+            - '@project.application.orm.repository'
+
+    project.application.application_data.rest_controller:
+        public: true
+        class: Project\Application\UserInterface\Rest\ShowApplicationData
+        arguments:
+            - '@shared.query.bus'
+
+    project.application.application_data_finder.handler:
+        class: Project\Application\Application\Action\Query\ApplicationDataFinder
+        tags:
+            name: messenger.message_handler
+            handles: Project\Application\Application\Model\Query\ApplicationData
+        arguments:
+            - '@project.application.orm.repository'
+
     project.application.update_application.rest_controller:
         public: true
         class: Project\Application\UserInterface\Rest\UpdateApplication

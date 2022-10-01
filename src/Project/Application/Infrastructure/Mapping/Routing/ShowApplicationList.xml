@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes xmlns="http://symfony.com/schema/routing">
+    <route
+        id="application_list"
+        path="/project/application"
+        methods="GET"
+        controller="project.application.application_list.rest_controller"
+    />
+</routes>

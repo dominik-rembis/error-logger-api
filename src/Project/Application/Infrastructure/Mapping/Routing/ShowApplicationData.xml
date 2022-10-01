@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <routes xmlns="http://symfony.com/schema/routing">
     <route
-        id="update_application"
+        id="show_application_data"
         path="/project/{uuid}/application"
-        methods="PUT"
-        controller="project.application.update_application.rest_controller"
+        methods="GET"
+        controller="project.application.application_data.rest_controller"
     />
 </routes>
