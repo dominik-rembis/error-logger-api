@@ -17,3 +17,31 @@ services:
             handles: Project\Application\Application\Model\Command\ApplicationData
         arguments:
             - '@shared.persistence.repository'
+
+    project.application.update_application.rest_controller:
+        public: true
+        class: Project\Application\UserInterface\Rest\UpdateApplication
+        arguments:
+            - '@shared.command.bus'
+
+    project.application.application_updater.handler:
+        class: Project\Application\Application\Action\Command\ApplicationUpdater
+        tags:
+            name: messenger.message_handler
+            handles: Project\Application\Application\Model\Command\NewApplicationData
+        arguments:
+            - '@shared.query.bus'
+            - '@shared.persistence.repository'
+
+    project.application.application_finder.handler:
+        class: Project\Application\Application\Action\Query\ApplicationEntityFinder
+        tags:
+            name: messenger.message_handler
+            handles: Project\Application\Application\Model\Query\ApplicationEntity
+        arguments:
+            - '@project.application.orm.repository'
+
+    project.application.orm.repository:
+        class: Project\Application\Infrastructure\Repository\ApplicationRepository
+        arguments:
+            - '@doctrine.orm.entity_manager'
